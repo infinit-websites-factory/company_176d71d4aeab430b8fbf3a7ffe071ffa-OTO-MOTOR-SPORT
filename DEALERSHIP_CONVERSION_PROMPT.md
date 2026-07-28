@@ -11,23 +11,22 @@ I need you to convert this car dealership website to a new dealership. Make all 
 
 **DEALERSHIP DETAILS:**
 - Existing website: 
-- Dealership Name: LUXURY CAR
-- Phone Number: +34747775728
-- Email Address: 
-- Street Address: 83HM+QJ El Prat de Llobregat, Spain
-- City/Postal: 83HM+QJ El Prat de Llobregat, Spain
-- Facebook URL: None
-- Instagram URL: 
-- Google Maps Location URL: https://maps.app.goo.gl/KPTob6R2WPd9uDtd7
-data=!3m1!4b1!4m6!3m5!1s0xd422d0aae13ce4b:0xeb0c0a1870db7983!8m2!3d40.5432558!4d-3.6105019!16s%2Fg%2F11vwy0my2t?entry=tts&g_ep=EgoyMDI1MTAyNy4wIPu8ASoASAFQAw%3D%3D&skid=54bf610b-042c-4933-a6b1-db155b5e0a36
-- Google Maps Embed URL: <iframe src="<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.053040855266!2d2.0815250758755677!3d41.32945997130732!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49f8445d66b77%3A0xf63709398a17e367!2sLuxury%20Car!5e0!3m2!1sen!2sin!4v1772612177733!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-- Google Rating: 4.4
+- Dealership Name: OTO MOTOR
+- Phone Number: +34600749009
+- Email Address: otomotor2013@gmail.com
+- Street Address: C. Cardeñas, 27B, 28690 Brunete, Madrid, Spain
+- City/Postal: 28690 Brunete, Madrid, Spain
+- Facebook URL:  https://www.facebook.com/people/Oto-Motorsport-SL/61586883309321/
+- Instagram URL: https://www.instagram.com/otomotorsport/
+- Google Maps Location URL:  https://www.google.com/maps/place/OTO+Motor+Sport+SL/@40.4010822,-3.9984665,19.5z/data=!4m6!3m5!1s0xd41972fe334e1cd:0x8ed9162adbdbd02e!8m2!3d40.4011529!4d-3.9982816!16s%2Fg%2F11stm4ppb3?entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D
+- Google Maps Embed URL:<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d537.1095864083261!2d-3.9984664581218397!3d40.40108224877727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd41972fe334e1cd%3A0x8ed9162adbdbd02e!2sOTO%20Motor%20Sport%20SL!5e0!3m2!1sen!2sin!4v1784570989990!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+- Google Rating: 3.0
 
 **BRANDING:**
-- Primary Color Hex: #1e429f
+- Primary Color Hex: #cc7524
 
 **CONFIGURATION:**
-- Profile ID: a5dd8bbf-2f7b-4b79-8246-f6fa76ecd0f9
+- Profile ID: 30f6c1b4-198d-4222-9ff4-f1e078c5be08
 - API_BASE_URL = https://multipost-public.app.infinit.cc
 
 **REQUIREMENTS:**

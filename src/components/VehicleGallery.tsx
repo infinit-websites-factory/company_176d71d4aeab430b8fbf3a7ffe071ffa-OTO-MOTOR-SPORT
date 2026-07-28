@@ -36,7 +36,7 @@ const VehicleGallery = () => {
 
   if (isError) {
     return (
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-[#F8F9FA]">
         <div className="container mx-auto max-w-7xl px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{t('vehicle_gallery.title')}</h2>
@@ -54,7 +54,7 @@ const VehicleGallery = () => {
   }
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-[#F8F9FA]">
       <div className="container mx-auto max-w-7xl px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">{t('vehicle_gallery.title')}</h2>
@@ -86,7 +86,7 @@ const VehicleGallery = () => {
           <div className="text-center mt-10">
             <a
               href="/stock"
-              className="inline-flex items-center justify-center rounded-full text-sm font-semibold transition-all duration-200 bg-foreground text-background hover:bg-foreground/90 h-11 px-8 shadow-sm hover:shadow-md"
+              className="inline-flex items-center justify-center rounded-full text-sm font-semibold transition-all duration-200 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 shadow-sm hover:shadow-md"
             >
               {t('vehicle_gallery.view_cars')}
             </a>

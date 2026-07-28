@@ -1,36 +1,36 @@
 {
   "seo": {
     "home": {
-      "title": "INFINIT Cars | Premium Used Vehicles in {city}",
+      "title": "OTO MOTOR | Premium Used Vehicles in {city}",
       "description": "Premium dealership specialising in high-end used and nearly new vehicles in {city}. Warranty, financing and VIP service. Best quality and price guaranteed."
     },
     "stock": {
-      "title": "Premium Vehicle Stock | INFINIT Cars {city}",
+      "title": "Premium Vehicle Stock | OTO MOTOR {city}",
       "description": "Explore our stock of high-end used and nearly new cars in {city}. BMW, Mercedes, Audi, Porsche and more. Warranty included."
     },
     "vehicle_detail": {
-      "title": "{vehicle} | INFINIT Cars {city}",
-      "description": "Buy your {vehicle} at INFINIT Cars {city}. 12-month warranty extendable to 3 years, tailored financing and VIP service."
+      "title": "{vehicle} | OTO MOTOR {city}",
+      "description": "Buy your {vehicle} at OTO MOTOR {city}. 12-month warranty extendable to 3 years, tailored financing and VIP service."
     },
     "sell": {
-      "title": "Sell Your Car at the Best Price | INFINIT Cars {city}",
+      "title": "Sell Your Car at the Best Price | OTO MOTOR {city}",
       "description": "Free, no-obligation vehicle valuation in {city}. Valuation within 24 hours, fast and secure process. We buy all types of cars."
     },
     "financing": {
-      "title": "Premium Vehicle Financing | INFINIT Cars {city}",
+      "title": "Premium Vehicle Financing | OTO MOTOR {city}",
       "description": "Tailored financing for your used car in {city}. Reduced instalments, approval within 24h and transparent terms."
     },
     "services": {
-      "title": "Premium Vehicle Services | INFINIT Cars {city}",
-      "description": "VIP service, warranty up to 3 years, UK-wide delivery, financing and vehicle valuation. Discover everything INFINIT Cars offers in {city}."
+      "title": "Premium Vehicle Services | OTO MOTOR {city}",
+      "description": "VIP service, warranty up to 3 years, UK-wide delivery, financing and vehicle valuation. Discover everything OTO MOTOR offers in {city}."
     },
     "contact": {
-      "title": "Contact | INFINIT Cars {city}",
-      "description": "Contact INFINIT Cars in {city}. Call us, write to us or visit us. We're here to help with buying, selling or financing your vehicle."
+      "title": "Contact | OTO MOTOR {city}",
+      "description": "Contact OTO MOTOR in {city}. Call us, write to us or visit us. We're here to help with buying, selling or financing your vehicle."
     },
     "not_found": {
-      "title": "Page Not Found | INFINIT Cars",
-      "description": "The page you are looking for does not exist. Return to the INFINIT Cars homepage."
+      "title": "Page Not Found | OTO MOTOR",
+      "description": "The page you are looking for does not exist. Return to the OTO MOTOR homepage."
     }
   },
   "common": {
@@ -65,7 +65,7 @@
     "placeholder": "Search by brand, model..."
   },
   "services": {
-    "title": "Our services at Luxury Car",
+    "title": "Our services at OTO MOTOR",
     "subtitle": "Commercialisation and import of custom premium vehicles, used and nearly new.",
     "vip": {
       "title": "VIP Service",
@@ -112,7 +112,7 @@
       },
       "schedule": {
         "question": "What are your opening hours?",
-        "answer": "We are available Monday to Saturday from 10:00 to 14:00 and 16:00 to 20:00. You can also reach us via WhatsApp or email outside business hours."
+        "answer": "Our opening hours are: Monday and Tuesday from 9:00 to 14:00 and 16:00 to 19:00, Wednesday from 9:00 to 19:00, and Thursday and Friday from 10:00 to 20:00. We are closed on Saturdays and Sundays. You can also reach us via WhatsApp or email outside these hours."
       },
       "test_drive": {
         "question": "Can I arrange a test drive?",
@@ -143,7 +143,7 @@
       "terms_conditions": "Terms and Conditions",
       "cookies": "Cookies"
     },
-    "copyright": "© 2026 Luxury Car. Powered by"
+    "copyright": "© 2026 OTO MOTOR. Powered by"
   },
   "contact_page": {
     "title": "Contact us",
@@ -253,13 +253,13 @@
         "name": "Jordi M.",
         "rating": 5,
         "date": "2 weeks ago",
-        "review": "I bought a BMW 5 Series from Luxury Car and the experience was exceptional. From the first contact, the team attended to me with total professionalism, explaining every detail of the vehicle and its complete history. The car was immaculate and the price very competitive compared to other dealerships. Absolutely recommended."
+        "review": "I bought a BMW 5 Series from OTO MOTOR and the experience was exceptional. From the first contact, the team attended to me with total professionalism, explaining every detail of the vehicle and its complete history. The car was immaculate and the price very competitive compared to other dealerships. Absolutely recommended."
       },
       {
         "name": "Marta G.",
         "rating": 5,
         "date": "1 month ago",
-        "review": "I was looking for a pre-owned Mercedes GLC and found exactly what I needed at Luxury Car. The advice was outstanding — they helped me choose the ideal model for my needs and the financing was arranged in record time. The condition of the vehicle far exceeded my expectations."
+        "review": "I was looking for a pre-owned Mercedes GLC and found exactly what I needed at OTO MOTOR. The advice was outstanding — they helped me choose the ideal model for my needs and the financing was arranged in record time. The condition of the vehicle far exceeded my expectations."
       },
       {
         "name": "Pedro S.",
@@ -271,7 +271,7 @@
         "name": "Laura R.",
         "rating": 5,
         "date": "2 months ago",
-        "review": "Very happy with my purchase of a Volvo XC60 at Luxury Car. The team took the time to understand my needs and presented options that fit my budget perfectly. The service was personal, professional and pressure-free. I recommend them without hesitation."
+        "review": "Very happy with my purchase of a Volvo XC60 at OTO MOTOR. The team took the time to understand my needs and presented options that fit my budget perfectly. The service was personal, professional and pressure-free. I recommend them without hesitation."
       },
       {
         "name": "Marc T.",
@@ -283,7 +283,7 @@
         "name": "Ana B.",
         "rating": 5,
         "date": "3 months ago",
-        "review": "A 10/10 buying experience. I purchased a Range Rover Evoque and the entire process was flawless — personalised advice, quick paperwork and punctual delivery. The Luxury Car team inspires trust and professionalism. Highly recommended for anyone looking for a quality vehicle."
+        "review": "A 10/10 buying experience. I purchased a Range Rover Evoque and the entire process was flawless — personalised advice, quick paperwork and punctual delivery. The OTO MOTOR team inspires trust and professionalism. Highly recommended for anyone looking for a quality vehicle."
       }
     ]
   },
@@ -310,7 +310,7 @@
       },
       "section_1_3": {
         "title": "1.3 Intellectual and Industrial Property",
-        "content": "All content on the website (texts, images, logos, designs, etc.) is the property of Luxury Car or authorised third parties. Its reproduction, distribution or modification is prohibited without express authorisation."
+        "content": "All content on the website (texts, images, logos, designs, etc.) is the property of OTO MOTOR or authorised third parties. Its reproduction, distribution or modification is prohibited without express authorisation."
       },
       "section_1_4": {
         "title": "1.4 Liability",
@@ -532,7 +532,7 @@
   },
   "services_page": {
     "hero": {
-      "title": "Services at Luxury Car",
+      "title": "Services at OTO MOTOR",
       "subtitle": "We commercialise and import custom premium vehicles, used and nearly new in"
     },
     "main_services": {
@@ -559,7 +559,7 @@
       "button": "Get my vehicle valuation"
     },
     "alt_texts": {
-      "hero": "White BMW with Luxury Car logo",
+      "hero": "White BMW with OTO MOTOR logo",
       "sell": "Grey Porsche sports car on track - Premium vehicle valuation services"
     }
   },
@@ -709,9 +709,9 @@
       "address": "Address",
       "address_placeholder": "Street, number, floor, door",
       "postal_code": "Postal code",
-      "postal_code_placeholder": "08820",
+      "postal_code_placeholder": "28690",
       "city": "City",
-      "city_placeholder": "El Prat de Llobregat",
+      "city_placeholder": "Brunete",
       "accept_privacy": "I accept commercial communications and offers. I accept the",
       "privacy_policy": "privacy policy",
       "continue": "Continue",
@@ -761,7 +761,7 @@
       "success": "Reservation confirmed! We will contact you soon."
     },
     "appointment": {
-      "modal_title": "Book your appointment at Luxury Car",
+      "modal_title": "Book your appointment at OTO MOTOR",
       "date_label": "Appointment date",
       "time_label": "Time",
       "time_placeholder": "Select a time",

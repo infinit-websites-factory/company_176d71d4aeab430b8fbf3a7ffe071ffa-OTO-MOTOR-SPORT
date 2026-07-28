@@ -6,16 +6,27 @@ import { useVehicleFilters } from "@/hooks/useVehicleFilters";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PageHeader from "@/components/PageHeader";
 import SEO from "@/components/SEO";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+const ITEMS_PER_PAGE = 30;
+
+const SHOWING_LABEL: Record<string, (a: number, b: number, tt: number) => string> = {
+  es: (a, b, tt) => `Mostrando ${a}–${b} de ${tt} vehículos`,
+  en: (a, b, tt) => `Showing ${a}–${b} of ${tt} vehicles`,
+  fr: (a, b, tt) => `Affichage ${a}–${b} sur ${tt} véhicules`,
+};
+const PREV_LABEL: Record<string, string> = { es: "Anterior", en: "Previous", fr: "Précédent" };
+const NEXT_LABEL: Record<string, string> = { es: "Siguiente", en: "Next", fr: "Suivant" };
+
 const Stock = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
   const initialSearch = searchParams.get('search') || '';
 
@@ -44,6 +55,35 @@ const Stock = () => {
     filteredVehicles,
     filterOptions,
   } = useVehicleFilters(vehicles);
+
+  // Pagination (30 per page)
+  const [page, setPage] = useState(1);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const totalPages = Math.max(1, Math.ceil(filteredVehicles.length / ITEMS_PER_PAGE));
+  const startIdx = (page - 1) * ITEMS_PER_PAGE;
+  const paginatedVehicles = filteredVehicles.slice(startIdx, startIdx + ITEMS_PER_PAGE);
+  const filterKey = JSON.stringify(filters);
+
+  // Reset to page 1 whenever the filters/sort change
+  useEffect(() => {
+    setPage(1);
+  }, [filterKey]);
+
+  const goToPage = (p: number) => {
+    const next = Math.min(Math.max(1, p), totalPages);
+    setPage(next);
+    requestAnimationFrame(() => gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  };
+
+  // Page numbers with ellipsis (1 2 3 … last)
+  const pageItems: (number | "…")[] = [];
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || Math.abs(i - page) <= 1) {
+      pageItems.push(i);
+    } else if (pageItems[pageItems.length - 1] !== "…") {
+      pageItems.push("…");
+    }
+  }
 
   // Set initial search from URL parameter only once, then remove it from the URL
   useEffect(() => {
@@ -74,16 +114,9 @@ const Stock = () => {
         <SEO page="stock" />
         <Header />
         <main>
-          <div className="container mx-auto px-4 pt-8 pb-16">
-            <div className="text-center mb-8">
-              <h1 className="text-4xl font-bold mb-4">{t('stock_page.title')}</h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                {t('stock_page.subtitle')}
-              </p>
-            </div>
-          </div>
+          <PageHeader title={t('stock_page.title')} subtitle={t('stock_page.subtitle')} />
 
-          <div className="container mx-auto px-4 pb-16">
+          <div className="container mx-auto px-4 pt-16 pb-16">
             <Alert className="max-w-md mx-auto">
               <AlertCircle className="h-4 w-4" />
               <AlertDescription>
@@ -101,17 +134,10 @@ const Stock = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        <div className="container mx-auto px-4 pt-8 pb-16">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-4">{t('stock_page.title')}</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t('stock_page.subtitle')}
-            </p>
-          </div>
-        </div>
-        
+        <PageHeader title={t('stock_page.title')} subtitle={t('stock_page.subtitle')} />
+
         {/* Main Content with Sidebar Layout */}
-        <div className="container mx-auto px-4 pb-16">
+        <div className="container mx-auto px-4 pt-12 pb-16">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
               {/* Filters Sidebar */}
@@ -177,7 +203,7 @@ const Stock = () => {
                 </div>
                 
                 {/* Vehicles Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div ref={gridRef} className="scroll-mt-28 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {isLoading ? (
                     Array.from({ length: 12 }).map((_, index) => (
                       <div key={index} className="space-y-3">
@@ -190,7 +216,7 @@ const Stock = () => {
                       </div>
                     ))
                   ) : filteredVehicles.length > 0 ? (
-                    filteredVehicles.map((vehicle) => (
+                    paginatedVehicles.map((vehicle) => (
                       <VehicleCard key={vehicle.id} {...vehicle} />
                     ))
                   ) : (
@@ -207,6 +233,60 @@ const Stock = () => {
                     </div>
                   )}
                 </div>
+
+                {/* Counter + Pagination */}
+                {!isLoading && filteredVehicles.length > 0 && (
+                  <div className="mt-10 flex flex-col items-center gap-5">
+                    <p className="text-sm text-muted-foreground">
+                      {(SHOWING_LABEL[language] || SHOWING_LABEL.es)(
+                        startIdx + 1,
+                        Math.min(startIdx + ITEMS_PER_PAGE, filteredVehicles.length),
+                        filteredVehicles.length,
+                      )}
+                    </p>
+
+                    {totalPages > 1 && (
+                      <div className="flex items-center gap-1.5 flex-wrap justify-center">
+                        <button
+                          onClick={() => goToPage(page - 1)}
+                          disabled={page === 1}
+                          className="inline-flex items-center gap-1 h-10 px-3 rounded-lg border border-gray-200 bg-white text-sm font-semibold text-foreground hover:border-primary hover:text-primary disabled:opacity-40 disabled:pointer-events-none transition-colors"
+                        >
+                          <ChevronLeft className="w-4 h-4" />
+                          <span className="hidden sm:inline">{PREV_LABEL[language] || PREV_LABEL.es}</span>
+                        </button>
+
+                        {pageItems.map((item, idx) =>
+                          item === "…" ? (
+                            <span key={`e${idx}`} className="w-10 h-10 flex items-center justify-center text-muted-foreground">…</span>
+                          ) : (
+                            <button
+                              key={item}
+                              onClick={() => goToPage(item)}
+                              aria-current={item === page ? "page" : undefined}
+                              className={`w-10 h-10 rounded-lg text-sm font-semibold transition-all ${
+                                item === page
+                                  ? "bg-primary text-primary-foreground shadow-md shadow-primary/30"
+                                  : "bg-white border border-gray-200 text-foreground hover:border-primary hover:text-primary"
+                              }`}
+                            >
+                              {item}
+                            </button>
+                          ),
+                        )}
+
+                        <button
+                          onClick={() => goToPage(page + 1)}
+                          disabled={page === totalPages}
+                          className="inline-flex items-center gap-1 h-10 px-3 rounded-lg border border-gray-200 bg-white text-sm font-semibold text-foreground hover:border-primary hover:text-primary disabled:opacity-40 disabled:pointer-events-none transition-colors"
+                        >
+                          <span className="hidden sm:inline">{NEXT_LABEL[language] || NEXT_LABEL.es}</span>
+                          <ChevronRight className="w-4 h-4" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>

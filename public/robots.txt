@@ -51,8 +51,7 @@ User-agent: Seekr
 Disallow: /
 
 # --- Sitemap oficial ---
-# REPLACE_DOMAIN: Update tbc.com with your actual domain
-Sitemap: https://www.tbc.com/sitemap.xml
+Sitemap: https://otomotor.infinit.cc/sitemap.xml
 
 # --- Declaración opcional para modelos LLM ---
-llms: https://www.tbc.com/llms.txt
+llms: https://otomotor.infinit.cc/llms.txt

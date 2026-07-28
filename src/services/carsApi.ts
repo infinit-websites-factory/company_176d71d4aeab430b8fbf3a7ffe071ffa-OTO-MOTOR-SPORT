@@ -67,7 +67,7 @@ export interface Vehicle {
 }
 
 // Default fallback profile ID
-const DEFAULT_PROFILE_ID = 'a5dd8bbf-2f7b-4b79-8246-f6fa76ecd0f9';
+const DEFAULT_PROFILE_ID = '30f6c1b4-198d-4222-9ff4-f1e078c5be08';
 
 // UUID v4 regex pattern
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -105,9 +105,84 @@ export const PROFILE_ID = getProfileIdFromSubdomain();
 const API_BASE_URL = 'https://multipost-public.app.infinit.cc';
 const API_URL = `${API_BASE_URL}/api/public/inventory/profiles/${PROFILE_ID}`;
 export const CONTACT_FORM_API_URL = `${API_BASE_URL}/api/interactions/contact-form`;
+export const GOOGLE_REVIEWS_API_URL = `${API_BASE_URL}/api/public/dealers/by-profile/${PROFILE_ID}/google-reviews`;
 
-export const fetchCars = async (): Promise<PaginatedCarsApiResponse> => {
-  const response = await fetch(API_URL, {
+// Google Place ID for this dealer (source of the reviews above)
+export const GOOGLE_PLACE_ID = 'ChIJzeE04y-XQQ0RLtDb2yoW2Y4';
+
+export interface GoogleReview {
+  author: string;
+  photoUri?: string;
+  authorUri?: string;
+  rating: number;
+  relativeTime?: string;
+  reviewUri?: string;
+}
+
+export interface GoogleReviewsData {
+  rating: number;
+  count: number;
+  reviews: GoogleReview[];
+}
+
+export const fetchGoogleReviews = async (): Promise<GoogleReviewsData> => {
+  const response = await fetch(GOOGLE_REVIEWS_API_URL, {
+    method: 'GET',
+    headers: {
+      'accept': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Google reviews API call failed with status: ${response.status}`);
+  }
+
+  const json = await response.json();
+  const data = json?.result?.data ?? {};
+  const sample: any[] = Array.isArray(data.google_reviews_sample) ? data.google_reviews_sample : [];
+
+  return {
+    rating: Number(data.google_rating) || 0,
+    count: Number(data.google_review_count) || 0,
+    reviews: sample.map((r) => ({
+      author: r?.authorAttribution?.displayName || 'Google',
+      photoUri: r?.authorAttribution?.photoUri,
+      authorUri: r?.authorAttribution?.uri,
+      rating: Number(r?.rating) || 0,
+      relativeTime: r?.relativePublishTimeDescription,
+      reviewUri: r?.googleMapsUri,
+    })),
+  };
+};
+
+export interface CompanyInfo {
+  vehiclesInStock: number;
+  googleRating: number;
+  reviewCount: number;
+}
+
+/**
+ * Aggregate real dealership figures from the public endpoints (live inventory
+ * count + real Google rating/review count). There is no dedicated company-info
+ * endpoint, so we compose verifiable numbers instead of inventing metrics.
+ */
+export const fetchCompanyInfo = async (): Promise<CompanyInfo> => {
+  const [inventory, reviews] = await Promise.all([
+    fetch(`${API_URL}?page=1`, { headers: { accept: 'application/json' } })
+      .then((r) => (r.ok ? r.json() : { total: 0 }))
+      .catch(() => ({ total: 0 })),
+    fetchGoogleReviews().catch(() => ({ rating: 0, count: 0, reviews: [] })),
+  ]);
+
+  return {
+    vehiclesInStock: Number(inventory?.total) || 0,
+    googleRating: reviews.rating || 0,
+    reviewCount: reviews.count || 0,
+  };
+};
+
+const fetchCarsPage = async (page: number): Promise<PaginatedCarsApiResponse> => {
+  const response = await fetch(`${API_URL}?page=${page}`, {
     method: 'GET',
     headers: {
       'accept': 'application/json',
@@ -122,14 +197,58 @@ export const fetchCars = async (): Promise<PaginatedCarsApiResponse> => {
   return response.json();
 };
 
+/**
+ * Server-side paginated fetch. Builds a query string from the given params,
+ * skipping empty/undefined values, and returns a single page of results.
+ * Used for infinite-scroll dropdowns/listings so we never load every car at once.
+ */
+export const fetchCarsPaginated = async (
+  params: { page?: number; size?: number; search?: string } = {}
+): Promise<PaginatedCarsApiResponse> => {
+  const url = new URL(API_URL);
+  Object.entries({ page: 1, size: 30, ...params }).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== '') {
+      url.searchParams.set(key, String(value));
+    }
+  });
+
+  const response = await fetch(url.toString(), {
+    method: 'GET',
+    headers: {
+      'accept': 'application/json',
+      'cache-control': 'no-cache',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`API call failed with status: ${response.status}`);
+  }
+
+  return response.json();
+};
+
+// The inventory API is capped at 50 items per page, so fetch every page and
+// merge them — otherwise vehicles beyond the first page are unreachable.
+export const fetchCars = async (): Promise<PaginatedCarsApiResponse> => {
+  const first = await fetchCarsPage(1);
+  const items = [...(first.items ?? [])];
+
+  const totalPages = first.pages || 1;
+  for (let page = 2; page <= totalPages; page++) {
+    const next = await fetchCarsPage(page);
+    if (!next.items?.length) break;
+    items.push(...next.items);
+  }
+
+  return { ...first, items, total: first.total ?? items.length };
+};
+
 export const transformApiCarToVehicle = (apiCar: CarApiResponse): Vehicle => {
   const registrationYear = apiCar.registration_date
     ? new Date(apiCar.registration_date).getFullYear()
     : new Date().getFullYear();
 
   const badgeValue = apiCar.country_details?.environmental_badge;
-
-  console.log('API Car badge value:', badgeValue, 'for', apiCar.make, apiCar.model);
 
   return {
     id: apiCar.id,

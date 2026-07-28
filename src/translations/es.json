@@ -1,36 +1,36 @@
 {
   "seo": {
     "home": {
-      "title": "INFINIT Cars | Vehículos Premium de Ocasión en {city}",
+      "title": "OTO MOTOR | Vehículos Premium de Ocasión en {city}",
       "description": "Concesionario premium especializado en vehículos de alta gama, ocasión y seminuevos en {city}. Garantía, financiación y servicio VIP. La mejor calidad y precio."
     },
     "stock": {
-      "title": "Stock de Vehículos Premium | INFINIT Cars {city}",
+      "title": "Stock de Vehículos Premium | OTO MOTOR {city}",
       "description": "Explora nuestro stock de coches de alta gama de ocasión y seminuevos en {city}. BMW, Mercedes, Audi, Porsche y más. Garantía incluida."
     },
     "vehicle_detail": {
-      "title": "{vehicle} | INFINIT Cars {city}",
-      "description": "Compra tu {vehicle} en INFINIT Cars {city}. Garantía de 12 meses ampliable a 3 años, financiación a medida y servicio VIP."
+      "title": "{vehicle} | OTO MOTOR {city}",
+      "description": "Compra tu {vehicle} en OTO MOTOR {city}. Garantía de 12 meses ampliable a 3 años, financiación a medida y servicio VIP."
     },
     "sell": {
-      "title": "Vende tu Coche al Mejor Precio | INFINIT Cars {city}",
+      "title": "Vende tu Coche al Mejor Precio | OTO MOTOR {city}",
       "description": "Tasación gratuita y sin compromiso de tu vehículo en {city}. Valoración en 24 horas, proceso rápido y seguro. Compramos todo tipo de coches."
     },
     "financing": {
-      "title": "Financiación de Vehículos Premium | INFINIT Cars {city}",
+      "title": "Financiación de Vehículos Premium | OTO MOTOR {city}",
       "description": "Financiación a medida para tu coche de ocasión en {city}. Cuotas reducidas, aprobación en 24h y condiciones transparentes."
     },
     "services": {
-      "title": "Servicios Premium para tu Vehículo | INFINIT Cars {city}",
-      "description": "Servicio VIP, garantía hasta 3 años, envío a toda España, financiación y tasación de vehículos. Descubre todo lo que INFINIT Cars ofrece en {city}."
+      "title": "Servicios Premium para tu Vehículo | OTO MOTOR {city}",
+      "description": "Servicio VIP, garantía hasta 3 años, envío a toda España, financiación y tasación de vehículos. Descubre todo lo que OTO MOTOR ofrece en {city}."
     },
     "contact": {
-      "title": "Contacto | INFINIT Cars {city}",
-      "description": "Contacta con INFINIT Cars en {city}. Llámanos, escríbenos o visítanos. Estamos aquí para ayudarte con la compra, venta o financiación de tu vehículo."
+      "title": "Contacto | OTO MOTOR {city}",
+      "description": "Contacta con OTO MOTOR en {city}. Llámanos, escríbenos o visítanos. Estamos aquí para ayudarte con la compra, venta o financiación de tu vehículo."
     },
     "not_found": {
-      "title": "Página no encontrada | INFINIT Cars",
-      "description": "La página que buscas no existe. Vuelve a la página principal de INFINIT Cars."
+      "title": "Página no encontrada | OTO MOTOR",
+      "description": "La página que buscas no existe. Vuelve a la página principal de OTO MOTOR."
     }
   },
   "common": {
@@ -57,16 +57,16 @@
     "phone": "Teléfono"
   },
   "hero": {
-    "title": "Vehículos de Ocasión",
+    "title": "Coches de ocasión garantizados al mejor precio",
     "subtitle": "en",
-    "description": "Somos referentes en la comercialización e importación de vehículos premium de ocasión, seminuevos y Km0."
+    "description": "Vehículos premium de más de 21 marcas disponibles. Garantía técnica completa y financiación a medida. Entrega a nivel nacional."
   },
   "search": {
     "placeholder": "Buscar por marca, modelo..."
   },
   "services": {
-    "title": "Nuestros servicios en Luxury Car",
-    "subtitle": "Comercialización e importación de vehículos premium a la carta, de ocasión, seminuevos y Km0.",
+    "title": "Nuestros servicios en OTO MOTOR",
+    "subtitle": "Tu destino premium para vehículos de alto rendimiento y lujo. Experiencia y confianza en cada kilómetro, con garantía técnica y financiación a medida.",
     "vip": {
       "title": "Servicio VIP",
       "description": "Nos encargamos de todo: recogida, entrega, limpieza y otras gestiones que necesites. Solo tendrás que preocuparte por ponerte al volante de tu nuevo vehículo.",
@@ -108,11 +108,11 @@
       },
       "trade_in": {
         "question": "¿Aceptáis mi vehículo actual como parte de pago?",
-        "answer": "Sí, en Luxury Car aceptamos vehículos como parte de pago. Realizamos una tasación profesional gratuita y sin compromiso, considerando marca, modelo, año, kilometraje, estado general e historial de mantenimiento. Te ofrecemos un precio justo y transparente que se descuenta directamente del precio de tu nuevo vehículo."
+        "answer": "Sí, en OTO MOTOR aceptamos vehículos como parte de pago. Realizamos una tasación profesional gratuita y sin compromiso, considerando marca, modelo, año, kilometraje, estado general e historial de mantenimiento. Te ofrecemos un precio justo y transparente que se descuenta directamente del precio de tu nuevo vehículo."
       },
       "schedule": {
         "question": "¿Cuáles son vuestros horarios de atención?",
-        "answer": "Estamos disponibles de lunes a sábado de 10:00 a 14:00 y de 16:00 a 20:00. Puedes visitarnos dentro de este horario para ver nuestros vehículos sin necesidad de cita previa. Si prefieres una atención más personalizada o deseas ver un vehículo concreto con mayor detalle, te recomendamos solicitar cita previa, de esta forma podremos prepararte el coche y dedicarte más tiempo durante la visita. También puedes contactarnos por WhatsApp o email fuera del horario comercial y te responderemos lo antes posible."
+        "answer": "Nuestro horario es: lunes y martes de 9:00 a 14:00 y de 16:00 a 19:00, miércoles de 9:00 a 19:00, y jueves y viernes de 10:00 a 20:00. Los sábados y domingos permanecemos cerrados. Puedes visitarnos dentro de este horario para ver nuestros vehículos sin necesidad de cita previa. Si prefieres una atención más personalizada, te recomendamos solicitar cita previa. También puedes contactarnos por WhatsApp o email fuera del horario comercial y te responderemos lo antes posible."
       },
       "test_drive": {
         "question": "¿Puedo concertar una prueba de conducción?",
@@ -143,7 +143,7 @@
       "terms_conditions": "Términos y Condiciones",
       "cookies": "Cookies"
     },
-    "copyright": "© 2026 Luxury Car. Desarrollado por"
+    "copyright": "© 2026 OTO MOTOR. Desarrollado por"
   },
   "contact_page": {
     "title": "Contacta con nosotros",
@@ -250,40 +250,40 @@
     "reviews_count": "reseñas",
     "testimonials": [
       {
-        "name": "Jordi M.",
+        "name": "José M.",
         "rating": 5,
         "date": "Hace 2 semanas",
-        "review": "Compré un BMW Serie 5 seminuevo en Luxury Car y la experiencia fue excepcional. Desde el primer contacto, el equipo me atendió con total profesionalidad, explicándome cada detalle del vehículo y su historial completo. El coche estaba impecable y el precio muy competitivo respecto a otros concesionarios. Totalmente recomendable."
+        "review": "La atención fue muy buena y todas las gestiones se hicieron muy rápidas. Servicio excelente de principio a fin. Me explicaron cada detalle del coche con total sinceridad y el precio fue muy competitivo. Totalmente recomendable."
       },
       {
-        "name": "Marta G.",
+        "name": "Cristina R.",
         "rating": 5,
         "date": "Hace 1 mes",
-        "review": "Buscaba un Mercedes GLC de ocasión y encontré exactamente lo que necesitaba en Luxury Car. El asesoramiento fue excepcional, me ayudaron a elegir el modelo ideal según mis necesidades y la financiación se gestionó en tiempo récord. El estado del vehículo superó con creces mis expectativas."
+        "review": "Personal muy agradable que resolvió todas mis dudas con transparencia. El vehículo llegó sin ninguna sorpresa desagradable, tal y como me lo habían descrito. La financiación se gestionó en menos de 24 horas. Muy contenta con la compra."
       },
       {
-        "name": "Pedro S.",
-        "rating": 4,
+        "name": "David L.",
+        "rating": 5,
         "date": "Hace 3 semanas",
-        "review": "Proceso de compra profesional y transparente. Me mantuvieron informado en todo momento sobre el estado de mi Audi Q5. El coche llegó a casa en perfectas condiciones con el transporte incluido. Buena experiencia, sin duda repetiré."
+        "review": "Concesionario de confianza, sin duda uno de los mejores de la zona. Gran variedad de marcas donde elegir y un trato muy cercano. Me acompañaron durante todo el proceso y la entrega fue puntual. Repetiré seguro."
       },
       {
-        "name": "Laura R.",
-        "rating": 5,
-        "date": "Hace 2 meses",
-        "review": "Muy satisfecha con mi compra de un Volvo XC60 en Luxury Car. El equipo se tomó el tiempo de entender mis necesidades y me presentaron opciones que se ajustaban perfectamente a mi presupuesto. La atención fue cercana, profesional y sin presiones. Lo recomiendo sin dudarlo."
-      },
-      {
-        "name": "Marc T.",
+        "name": "Marta S.",
         "rating": 4,
-        "date": "Hace 1 mes",
-        "review": "Gran selección de vehículos premium y un trato muy correcto. Compré un Porsche Cayenne y la gestión fue rápida. El vehículo estaba exactamente como lo describieron en las fotos y especificaciones. Repetiría sin duda."
+        "date": "Hace 2 meses",
+        "review": "Seriedad y fiabilidad, muy buen trato por parte de todo el equipo. El coche estaba en perfecto estado y con su garantía técnica incluida. Proceso de compra ágil y sin presiones. Muy recomendable."
       },
       {
-        "name": "Ana B.",
+        "name": "Alberto G.",
+        "rating": 5,
+        "date": "Hace 1 mes",
+        "review": "Compré un coche de ocasión y la experiencia fue inmejorable. Vehículo revisado, documentación al día y gestión de transferencia incluida. Además me lo entregaron en casa sin ningún problema. Profesionales de verdad."
+      },
+      {
+        "name": "Nuria P.",
         "rating": 5,
         "date": "Hace 3 meses",
-        "review": "Una experiencia de compra de 10. Adquirí un Range Rover Evoque y todo el proceso fue impecable: asesoramiento personalizado, documentación rápida y entrega puntual. El equipo de Luxury Car transmite confianza y seriedad. Muy recomendable para quien busca un vehículo de calidad."
+        "review": "Gran selección de vehículos premium y un asesoramiento excelente. Me ayudaron a encontrar exactamente lo que buscaba dentro de mi presupuesto. Confianza, seriedad y rapidez en cada paso. Muy recomendable OTO MOTOR."
       }
     ]
   },
@@ -310,7 +310,7 @@
       },
       "section_1_3": {
         "title": "1.3 Propiedad Intelectual e Industrial",
-        "content": "Todos los contenidos del sitio web (textos, imágenes, logotipos, diseños, etc.) son propiedad de Luxury Car o de terceros autorizados. Queda prohibida su reproducción, distribución o modificación sin autorización expresa."
+        "content": "Todos los contenidos del sitio web (textos, imágenes, logotipos, diseños, etc.) son propiedad de OTO MOTOR o de terceros autorizados. Queda prohibida su reproducción, distribución o modificación sin autorización expresa."
       },
       "section_1_4": {
         "title": "1.4 Responsabilidad",
@@ -465,7 +465,7 @@
   },
   "services_page": {
     "hero": {
-      "title": "Servicios en Luxury Car",
+      "title": "Servicios en OTO MOTOR",
       "subtitle": "Comercializamos e importamos vehículos premium a la carta, de ocasión, seminuevos y de KM 0 en"
     },
     "main_services": {
@@ -492,7 +492,7 @@
       "button": "Tasar mi vehículo"
     },
     "alt_texts": {
-      "hero": "Vehículo premium con logo de Luxury Car",
+      "hero": "Vehículo premium con logo de OTO MOTOR",
       "sell": "Porsche deportivo gris en pista - Servicios de tasación de vehículos premium"
     }
   },
@@ -710,9 +710,9 @@
       "address": "Dirección",
       "address_placeholder": "Calle, número, piso, puerta",
       "postal_code": "Código postal",
-      "postal_code_placeholder": "08820",
+      "postal_code_placeholder": "28690",
       "city": "Población",
-      "city_placeholder": "El Prat de Llobregat",
+      "city_placeholder": "Brunete",
       "accept_privacy": "Acepto las comunicaciones comerciales y de ofertas. Acepto la",
       "privacy_policy": "política de privacidad",
       "continue": "Continuar",
@@ -762,7 +762,7 @@
       "success": "¡Reserva confirmada! Nos pondremos en contacto contigo pronto."
     },
     "appointment": {
-      "modal_title": "Reserva tu cita en Luxury Car",
+      "modal_title": "Reserva tu cita en OTO MOTOR",
       "date_label": "Fecha de la cita",
       "time_label": "Hora",
       "time_placeholder": "Selecciona una hora",

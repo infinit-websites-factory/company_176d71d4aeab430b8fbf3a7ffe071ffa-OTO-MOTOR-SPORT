@@ -1,22 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- REPLACE_DOMAIN: Update https://www.tbc.com with your actual domain -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.tbc.com/</loc>
+    <loc>https://otomotor.infinit.cc/</loc>
   </url>
   <url>
-    <loc>https://www.tbc.com/stock</loc>
+    <loc>https://otomotor.infinit.cc/stock</loc>
   </url>
   <url>
-    <loc>https://www.tbc.com/sell</loc>
+    <loc>https://otomotor.infinit.cc/sell</loc>
   </url>
   <url>
-    <loc>https://www.tbc.com/financing</loc>
+    <loc>https://otomotor.infinit.cc/financing</loc>
   </url>
   <url>
-    <loc>https://www.tbc.com/services</loc>
+    <loc>https://otomotor.infinit.cc/services</loc>
   </url>
   <url>
-    <loc>https://www.tbc.com/contact</loc>
+    <loc>https://otomotor.infinit.cc/contact</loc>
   </url>
 </urlset>

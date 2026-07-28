@@ -19,9 +19,9 @@
     --popover-foreground: 220 20% 10%;
 
     /* Dealer's brand color — replaced during conversion */
-    --primary: 223 68% 37%;
+    --primary: 357 92% 47%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 223 68% 32%;
+    --primary-hover: 357 92% 40%;
 
     --secondary: 210 15% 95%;
     --secondary-foreground: 220 20% 10%;
@@ -29,7 +29,7 @@
     --muted: 210 15% 95%;
     --muted-foreground: 220 10% 45%;
 
-    --accent: 223 68% 37%;
+    --accent: 357 92% 47%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -37,7 +37,7 @@
 
     --border: 220 13% 90%;
     --input: 220 13% 90%;
-    --ring: 223 68% 37%;
+    --ring: 357 92% 47%;
 
     /* Navigation colors */
     --nav-background: 0 0% 100%;
@@ -52,12 +52,12 @@
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 220 20% 10%;
-    --sidebar-primary: 223 68% 37%;
+    --sidebar-primary: 357 92% 47%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 210 15% 95%;
     --sidebar-accent-foreground: 220 20% 10%;
     --sidebar-border: 220 13% 90%;
-    --sidebar-ring: 223 68% 37%;
+    --sidebar-ring: 357 92% 47%;
   }
 }
 
@@ -78,5 +78,21 @@
 
   .section-light-alt {
     background: hsl(0 0% 100%);
+  }
+
+  /* Thumbnail strip scrollbar in brand primary color */
+  .thumb-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary)) transparent;
+  }
+  .thumb-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+  .thumb-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .thumb-scroll::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--primary));
+    border-radius: 9999px;
   }
 }

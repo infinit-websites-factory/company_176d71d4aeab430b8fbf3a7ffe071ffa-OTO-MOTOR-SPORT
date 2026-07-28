@@ -5,35 +5,52 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FAQ from "@/components/FAQ";
 import SEO from "@/components/SEO";
-import servicios2Image from "@/assets/servicios-2.png";
+import sellCarsPhoto from "@/assets/oto-motor-sell-cars.jpg";
+import servicesHero from "@/assets/oto-motor-services-hero.jpg";
+
+const SELL_IMAGE_TAG: Record<string, string> = {
+  es: "🚗 Máximo valor garantizado",
+  en: "🚗 Max Value Guarantee",
+  fr: "🚗 Valeur maximale garantie",
+};
+const SELL_PILL: Record<string, string> = {
+  es: "⚡ Tasación sin complicaciones",
+  en: "⚡ Hassle-Free Vehicle Appraisal",
+  fr: "⚡ Estimation sans souci",
+};
+const SELL_HEADLINE: Record<string, string> = {
+  es: "Vende tu coche al mejor precio, sin estrés",
+  en: "Sell Your Car at the Best Price, Stress-Free",
+  fr: "Vendez votre voiture au meilleur prix, sans stress",
+};
 
 const Services = () => {
-  const { getCityName, t } = useLanguage();
+  const { getCityName, t, language } = useLanguage();
   const cityName = getCityName();
   const mainServices = [
     {
       icon: Car,
       title: t('services_page.main_services.vip.title'),
       description: t('services_page.main_services.vip.description'),
-      iconBg: "bg-blue-50 text-blue-600",
+      iconBg: "bg-primary/10 text-primary",
     },
     {
       icon: Shield,
       title: t('services_page.main_services.warranty.title'),
       description: t('services_page.main_services.warranty.description'),
-      iconBg: "bg-emerald-50 text-emerald-600",
+      iconBg: "bg-primary/10 text-primary",
     },
     {
       icon: Truck,
       title: t('services_page.main_services.shipping.title'),
       description: t('services_page.main_services.shipping.description'),
-      iconBg: "bg-amber-50 text-amber-600",
+      iconBg: "bg-primary/10 text-primary",
     },
     {
       icon: CreditCard,
       title: t('services_page.main_services.financing.title'),
       description: t('services_page.main_services.financing.description'),
-      iconBg: "bg-violet-50 text-violet-600",
+      iconBg: "bg-primary/10 text-primary",
     }
   ];
 
@@ -43,16 +60,20 @@ const Services = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="container mx-auto max-w-7xl">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              {t('services_page.hero.title')}
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              {t('services_page.hero.subtitle')} {cityName}.
-            </p>
-          </div>
+      <section
+        className="relative flex items-center min-h-[300px] md:min-h-[360px] py-16 px-4 overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${servicesHero})`, backgroundPosition: "center 45%" }}
+      >
+        {/* Dark gradient overlay for legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
+        <div className="container mx-auto max-w-4xl relative z-10 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+            {t('services_page.hero.title')}
+          </h1>
+          <p className="text-lg text-gray-200 leading-relaxed max-w-2xl mx-auto drop-shadow">
+            {`${t('services_page.hero.subtitle')} ${cityName}.`}
+          </p>
+          <div className="bg-[#E52B28] h-1 w-16 mx-auto rounded-full mt-4" />
         </div>
       </section>
 
@@ -65,10 +86,10 @@ const Services = () => {
               return (
                 <div
                   key={index}
-                  className="group bg-white rounded-xl border border-gray-100 shadow-sm p-7 hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
+                  className="group bg-white rounded-xl border border-gray-100 shadow-lg p-7 hover:shadow-[0_10px_25px_rgba(227,6,19,0.3)] hover:border-red-500 hover:-translate-y-1 transition-all duration-300"
                 >
-                  <div className={`w-14 h-14 rounded-xl ${service.iconBg} flex items-center justify-center mb-5`}>
-                    <IconComponent className="w-7 h-7" />
+                  <div className={`w-16 h-16 rounded-xl ${service.iconBg} flex items-center justify-center mb-5 mx-auto`}>
+                    <IconComponent className="w-8 h-8" />
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-3">
                     {service.title}
@@ -86,22 +107,38 @@ const Services = () => {
       {/* Sell Your Car Section */}
       <section className="bg-white">
         <div className="container mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[400px]">
-            <div className="relative h-[300px] lg:h-auto overflow-hidden">
-              <img
-                src={servicios2Image}
-                alt={t('services_page.alt_texts.sell')}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            </div>
-            <div className="flex items-center bg-gray-50">
-              <div className="px-8 py-16 lg:px-16 lg:py-20 space-y-6">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/15 text-primary text-sm font-medium">
-                  <Car className="w-4 h-4" />
-                  <span>{t('services_page.sell_section.title')}</span>
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-0 px-4 py-10 lg:px-0">
+            <div className="group relative flex items-center justify-center p-8 lg:p-12">
+              {/* Geometric showcase backdrop */}
+              <div className="absolute inset-0 pointer-events-none">
+                {/* Soft orange blurred glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-primary/25 rounded-full blur-[90px]" />
+                {/* Right box — slides right on hover */}
+                <div className="absolute right-4 bottom-4 w-3/4 h-3/4 bg-gradient-to-br from-primary/15 via-primary/5 to-transparent rounded-[2rem] rotate-6 transition-transform duration-500 ease-out group-hover:translate-x-6 group-hover:translate-y-2" />
+                {/* Left box — slides left on hover */}
+                <div className="absolute left-6 top-6 w-1/2 h-1/2 border-2 border-primary/15 rounded-[2rem] -rotate-6 transition-transform duration-500 ease-out group-hover:-translate-x-6 group-hover:-translate-y-2" />
+              </div>
+
+              {/* Car image — pops up on hover */}
+              <div className="relative transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.03] before:absolute before:-inset-2 before:bg-[#E52B28]/20 before:blur-2xl before:rounded-3xl before:-z-10">
+                <img
+                  src={sellCarsPhoto}
+                  alt={t('services_page.alt_texts.sell')}
+                  className="w-full h-[450px] object-cover rounded-3xl shadow-2xl shadow-black/20 ring-1 ring-black/5"
+                />
+                {/* Accent badge overlay */}
+                <div className="absolute -top-3 -left-3 bg-[#E52B28] text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
+                  {SELL_IMAGE_TAG[language] || SELL_IMAGE_TAG.es}
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-                  {t('services_page.sell_section.title')}
+              </div>
+            </div>
+            <div className="flex items-center bg-gray-50 rounded-2xl">
+              <div className="px-8 py-16 lg:px-16 lg:py-20 space-y-6">
+                <div className="bg-red-50 text-[#E52B28] text-xs font-semibold px-3.5 py-1.5 rounded-full border border-red-100/80 inline-flex items-center gap-1.5">
+                  {SELL_PILL[language] || SELL_PILL.es}
+                </div>
+                <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                  {SELL_HEADLINE[language] || SELL_HEADLINE.es}
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   {t('services_page.sell_section.description')}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Phone, MapPin, Clock } from "lucide-react";
+import { Phone, MapPin, Clock, Facebook, Instagram, Mail } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -7,11 +7,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useLanguage } from "@/contexts/LanguageContext";
-import luxuryCarLogo from "@/assets/logoo.webp";
+import otoMotorLogo from "@/assets/oto-motor-logo.png";
 
 const Footer = () => {
   const [openModal, setOpenModal] = useState<string | null>(null);
-  const { getPhoneNumber, getAddress, getCityName, t } = useLanguage();
+  const { getPhoneNumber, getEmail, getAddress, getCityName, getOpeningHours, t } = useLanguage();
   const address = getAddress();
   const cityName = getCityName();
 
@@ -22,7 +22,7 @@ const Footer = () => {
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">{t('legal.privacy_policy.section_2_1.title')}</h3>
           <div className="bg-gray-50 p-4 rounded-lg">
-            <p><strong>{t('legal.privacy_policy.section_2_1.company_name')}:</strong> Luxury Car</p>
+            <p><strong>{t('legal.privacy_policy.section_2_1.company_name')}:</strong> OTO MOTOR</p>
             <p><strong>{t('legal.privacy_policy.section_2_1.address')}:</strong> {address.full}</p>
             <p><strong>{t('legal.privacy_policy.section_2_1.phone')}:</strong> {getPhoneNumber()}</p>
           </div>
@@ -52,7 +52,7 @@ const Footer = () => {
           <h3 className="text-lg font-semibold">{t('legal.legal_notice.section_1_1.title')}</h3>
           <p>{t('legal.legal_notice.section_1_1.content')}</p>
           <div className="bg-gray-50 p-4 rounded-lg">
-            <p><strong>{t('legal.legal_notice.section_1_1.owner')}:</strong> Luxury Car</p>
+            <p><strong>{t('legal.legal_notice.section_1_1.owner')}:</strong> OTO MOTOR</p>
             <p><strong>{t('legal.legal_notice.section_1_1.address')}:</strong> {address.full}</p>
             <p><strong>{t('legal.legal_notice.section_1_1.phone')}:</strong> {getPhoneNumber()}</p>
           </div>
@@ -116,75 +116,101 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-900 text-white py-14">
+    <footer className="bg-gradient-to-br from-red-600 via-red-600 to-red-700 text-white py-14">
       <div className="container mx-auto max-w-7xl px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
             <div className="mb-4">
-              <img src={luxuryCarLogo} alt="Luxury Car Logo" className="h-10 object-contain" />
+              <img src={otoMotorLogo} alt="OTO MOTOR Logo" className="h-14 object-contain brightness-0 invert" />
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <p className="text-white/80 text-base leading-relaxed">
               {t('footer.company_description')} {cityName}.
             </p>
+            <div className="mt-4 flex items-center gap-3">
+              <a
+                href="https://www.facebook.com/people/Oto-Motorsport-SL/61586883309321/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="w-9 h-9 rounded-full bg-[#1877F2] text-white flex items-center justify-center transition-transform hover:scale-110"
+              >
+                <Facebook size={16} className="fill-current" />
+              </a>
+              <a
+                href="https://www.instagram.com/otomotorsport/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-9 h-9 rounded-full text-white flex items-center justify-center transition-transform hover:scale-110"
+                style={{ background: "radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)" }}
+              >
+                <Instagram size={16} />
+              </a>
+            </div>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-semibold mb-4 text-white uppercase tracking-wide">{t('footer.contact_title')}</h3>
+            <h3 className="text-base font-semibold mb-4 text-white uppercase tracking-wide">{t('footer.contact_title')}</h3>
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
-                <Phone size={14} className="text-primary" />
-                <span className="text-gray-400 text-sm">{getPhoneNumber()}</span>
+                <Phone size={16} className="text-white" />
+                <a href={`tel:${getPhoneNumber()}`} className="text-white/85 text-base hover:text-white transition-colors">{getPhoneNumber()}</a>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Mail size={16} className="text-white flex-shrink-0" />
+                <a href={`mailto:${getEmail()}`} className="text-white/85 text-base hover:text-white transition-colors break-all">{getEmail()}</a>
               </div>
               <div className="flex items-start space-x-2">
-                <MapPin size={14} className="text-primary flex-shrink-0 mt-0.5" />
-                <span className="text-gray-400 text-sm">{address.full}</span>
+                <MapPin size={16} className="text-white flex-shrink-0 mt-0.5" />
+                <a href={address.mapsUrl} target="_blank" rel="noopener noreferrer" className="text-white/85 text-base hover:text-white transition-colors">{address.full}</a>
               </div>
             </div>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="text-sm font-semibold mb-4 text-white uppercase tracking-wide">{t('footer.services_title')}</h3>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>{t('footer.services_list.vehicle_sales')}</li>
-              <li>{t('footer.services_list.vehicle_purchase')}</li>
-              <li>{t('footer.services_list.financing')}</li>
-              <li>{t('footer.services_list.delivery')}</li>
-              <li>{t('footer.services_list.vip_service')}</li>
+            <h3 className="text-base font-semibold mb-4 text-white uppercase tracking-wide">{t('footer.services_title')}</h3>
+            <ul className="space-y-2 text-white/85 text-base">
+              <li><a href="/stock" className="hover:text-white transition-colors">{t('footer.services_list.vehicle_sales')}</a></li>
+              <li><a href="/sell" className="hover:text-white transition-colors">{t('footer.services_list.vehicle_purchase')}</a></li>
+              <li><a href="/financing" className="hover:text-white transition-colors">{t('footer.services_list.financing')}</a></li>
+              <li><a href="/services" className="hover:text-white transition-colors">{t('footer.services_list.delivery')}</a></li>
+              <li><a href="/services" className="hover:text-white transition-colors">{t('footer.services_list.vip_service')}</a></li>
             </ul>
           </div>
 
           {/* Hours */}
           <div>
-            <h3 className="text-sm font-semibold mb-4 text-white uppercase tracking-wide">{t('footer.hours_title')}</h3>
-            <div className="space-y-2 text-gray-400 text-sm">
-              <div className="flex items-center space-x-2">
-                <Clock size={14} className="text-primary" />
-                <span>{t('footer.hours.weekday')}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Clock size={14} className="text-primary" />
-                <span>{t('footer.hours.sunday')}</span>
-              </div>
-            </div>
+            <h3 className="text-base font-semibold mb-4 text-white uppercase tracking-wide">{t('footer.hours_title')}</h3>
+            <ul className="space-y-2 text-white/85 text-base">
+              {getOpeningHours().map((entry, index) => (
+                <li key={index} className="flex items-start gap-2">
+                  <Clock size={16} className="text-white mt-0.5 shrink-0" />
+                  <span className="flex-1 flex justify-between gap-3">
+                    <span className="text-white font-medium">{entry.label}</span>
+                    <span className={entry.closed ? "text-white/60" : ""}>{entry.value}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-10 pt-8">
+        <div className="border-t border-white/20 mt-10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-500 text-sm">
-              {t('footer.copyright')}{' '}<a href="https://infinit.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-300 transition-colors">INFINIT</a>
+            <p className="text-white/70 text-[15px]">
+              {t('footer.copyright')}{' '}<a href="https://infinit.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-white transition-colors">INFINIT</a>
             </p>
-            <div className="flex flex-wrap gap-4 text-sm text-gray-500">
-              <button onClick={() => setOpenModal('legal')} className="hover:text-gray-300 transition-colors">{t('footer.legal.legal_notice')}</button>
+            <div className="flex flex-wrap gap-4 text-[15px] text-white/70">
+              <button onClick={() => setOpenModal('legal')} className="hover:text-white transition-colors">{t('footer.legal.legal_notice')}</button>
               <span>·</span>
-              <button onClick={() => setOpenModal('privacy')} className="hover:text-gray-300 transition-colors">{t('footer.legal.privacy_policy')}</button>
+              <button onClick={() => setOpenModal('privacy')} className="hover:text-white transition-colors">{t('footer.legal.privacy_policy')}</button>
               <span>·</span>
-              <button onClick={() => setOpenModal('terms')} className="hover:text-gray-300 transition-colors">{t('footer.legal.terms_conditions')}</button>
+              <button onClick={() => setOpenModal('terms')} className="hover:text-white transition-colors">{t('footer.legal.terms_conditions')}</button>
               <span>·</span>
-              <button onClick={() => setOpenModal('cookies')} className="hover:text-gray-300 transition-colors">{t('footer.legal.cookies')}</button>
+              <button onClick={() => setOpenModal('cookies')} className="hover:text-white transition-colors">{t('footer.legal.cookies')}</button>
             </div>
           </div>
         </div>

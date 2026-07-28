@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ChevronLeft, ChevronRight, Share2, MapPin, Phone, Calendar, Mail, User, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Share2, MapPin, Phone, Calendar, Mail, User, X, Gauge, Fuel, Cog, Car, Palette, DoorOpen, Users, Cylinder, Zap } from "lucide-react";
 import { fetchCars, transformApiCarToVehicle, type Vehicle, CONTACT_FORM_API_URL, PROFILE_ID } from "@/services/carsApi";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
@@ -43,6 +43,16 @@ const VehicleDetail = () => {
     }
   };
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const thumbsRef = useRef<HTMLDivElement>(null);
+  // Keep the active thumbnail in view as the main image changes
+  // (scroll only the strip horizontally — avoids scrollIntoView moving the page)
+  useEffect(() => {
+    const strip = thumbsRef.current;
+    const active = strip?.children[currentImageIndex] as HTMLElement | undefined;
+    if (!strip || !active) return;
+    const left = active.offsetLeft - strip.clientWidth / 2 + active.clientWidth / 2;
+    strip.scrollTo({ left, behavior: "smooth" });
+  }, [currentImageIndex]);
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
   const [openPrivacyModal, setOpenPrivacyModal] = useState(false);
@@ -89,7 +99,8 @@ const VehicleDetail = () => {
     staleTime: 5 * 60 * 1000,
     retry: 2
   });
-  const vehicle: Vehicle | undefined = carsData ? transformApiCarToVehicle(carsData.items.find(car => car.id === id)!) : undefined;
+  const foundCar = carsData?.items.find(car => car.id === id);
+  const vehicle: Vehicle | undefined = foundCar ? transformApiCarToVehicle(foundCar) : undefined;
   useEffect(() => {
     if (!isLoading && !vehicle) {
       navigate('/stock');
@@ -331,13 +342,13 @@ const VehicleDetail = () => {
               {vehicle.brand} {vehicle.model}
             </h1>
             <div className="flex flex-wrap gap-2 mt-2">
-              <Badge variant="secondary">{vehicle.year}</Badge>
-              <Badge variant="secondary">{translateVehicleAttribute('transmission', vehicle.transmission)}</Badge>
-              <Badge variant="secondary">{translateVehicleAttribute('fuel', vehicle.fuel)}</Badge>
-              <Badge variant="secondary">{vehicle.mileage.toLocaleString()} {vehicle.mileageUnit}</Badge>
+              <Badge variant="secondary" className="bg-red-100 text-red-700 border border-red-200 hover:bg-red-100 font-medium">{vehicle.year}</Badge>
+              <Badge variant="secondary" className="bg-red-100 text-red-700 border border-red-200 hover:bg-red-100 font-medium">{translateVehicleAttribute('transmission', vehicle.transmission)}</Badge>
+              <Badge variant="secondary" className="bg-red-100 text-red-700 border border-red-200 hover:bg-red-100 font-medium">{translateVehicleAttribute('fuel', vehicle.fuel)}</Badge>
+              <Badge variant="secondary" className="bg-red-100 text-red-700 border border-red-200 hover:bg-red-100 font-medium">{vehicle.mileage.toLocaleString()} {vehicle.mileageUnit}</Badge>
             </div>
           </div>
-          <Button variant="outline" size="sm" onClick={handleShare} className="flex items-center gap-2">
+          <Button variant="outline" size="sm" onClick={handleShare} className="flex items-center gap-2 border-primary/40 text-primary hover:bg-primary hover:text-white hover:border-primary transition-colors">
             <Share2 className="w-4 h-4" />
             {t('vehicle_detail.actions.share')}
           </Button>
@@ -352,22 +363,22 @@ const VehicleDetail = () => {
               <img src={vehicle.images[currentImageIndex]} alt={`${vehicle.brand} ${vehicle.model}`} className="w-full h-full object-cover" />
               
               {vehicle.images.length > 1 && <>
-                  <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/90 text-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/90 text-foreground opacity-0 group-hover:opacity-100 hover:bg-[#E30613] hover:text-white transition-all">
                     <ChevronLeft className="w-5 h-5" />
                   </button>
-                  <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/90 text-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/90 text-foreground opacity-0 group-hover:opacity-100 hover:bg-[#E30613] hover:text-white transition-all">
                     <ChevronRight className="w-5 h-5" />
                   </button>
                   
-                  <div className="absolute bottom-4 right-4 bg-black/50 text-white px-2 py-1 rounded text-sm">
+                  <div className="absolute bottom-4 right-4 bg-black/50 text-white px-2 py-1 rounded text-sm transition-colors hover:bg-[#E30613]">
                     {currentImageIndex + 1} / {vehicle.images.length}
                   </div>
                 </>}
             </div>
 
-            {/* Thumbnail Navigation */}
-            {vehicle.images.length > 1 && <div className="grid grid-cols-5 gap-2">
-                {vehicle.images.slice(0, 5).map((image, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`aspect-video rounded overflow-hidden border-2 transition-colors ${currentImageIndex === index ? 'border-primary' : 'border-transparent hover:border-muted-foreground'}`}>
+            {/* Thumbnail Navigation — scrollable strip with all images */}
+            {vehicle.images.length > 1 && <div ref={thumbsRef} className="flex gap-2 overflow-x-auto pb-2 snap-x thumb-scroll">
+                {vehicle.images.map((image, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`shrink-0 w-28 aspect-video rounded overflow-hidden border-2 snap-start transition-colors ${currentImageIndex === index ? 'border-primary' : 'border-transparent hover:border-muted-foreground'}`}>
                     <img src={image} alt={`${t('vehicle_detail.gallery.view_label')} ${index + 1}`} className="w-full h-full object-cover" />
                   </button>)}
               </div>}
@@ -401,53 +412,49 @@ const VehicleDetail = () => {
                 <CardTitle>{t('vehicle_detail.specifications.title')}</CardTitle>
               </CardHeader>
               <CardContent className="pt-6">
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <div className="text-muted-foreground mb-1">{t('vehicle_detail.specifications.year')}</div>
-                    <div className="font-semibold">{vehicle.year}</div>
-                  </div>
-                  <div>
-                    <div className="text-muted-foreground mb-1">{t('vehicle_detail.specifications.mileage')}</div>
-                    <div className="font-semibold">{vehicle.mileage.toLocaleString()} {vehicle.mileageUnit}</div>
-                  </div>
-                  <div>
-                    <div className="text-muted-foreground mb-1">{t('vehicle_detail.specifications.fuel')}</div>
-                    <div className="font-semibold">{translateVehicleAttribute('fuel', vehicle.fuel).toUpperCase()}</div>
-                  </div>
-                  <div>
-                    <div className="text-muted-foreground mb-1">{t('vehicle_detail.specifications.transmission')}</div>
-                    <div className="font-semibold">{translateVehicleAttribute('transmission', vehicle.transmission).toUpperCase()}</div>
-                  </div>
-                  <div>
-                    <div className="text-muted-foreground mb-1">{t('vehicle_detail.specifications.body_type')}</div>
-                    <div className="font-semibold">{translateVehicleAttribute('body_type', vehicle.type).toUpperCase()}</div>
-                  </div>
-                  {vehicle.color && <div>
-                      <div className="text-muted-foreground mb-1">{t('vehicle_detail.specifications.color')}</div>
-                      <div className="font-semibold">{translateVehicleAttribute('color', vehicle.color).toUpperCase()}</div>
-                    </div>}
-                  {vehicle.doors && <div>
-                      <div className="text-muted-foreground mb-1">{t('vehicle_detail.specifications.doors')}</div>
-                      <div className="font-semibold">{vehicle.doors}</div>
-                    </div>}
-                  {vehicle.seats && <div>
-                      <div className="text-muted-foreground mb-1">{t('vehicle_detail.specifications.seats')}</div>
-                      <div className="font-semibold">{vehicle.seats}</div>
-                    </div>}
-                  {vehicle.engineSize && <div>
-                      <div className="text-muted-foreground mb-1">{t('vehicle_detail.specifications.engine_size')}</div>
-                      <div className="font-semibold">{vehicle.engineSize} {vehicle.engineSizeUnit}</div>
-                    </div>}
-                  {vehicle.enginePower && <div>
-                      <div className="text-muted-foreground mb-1">{t('vehicle_detail.specifications.engine_power')}</div>
-                      <div className="font-semibold">{vehicle.enginePower} CV</div>
-                    </div>}
-                  {badgeImage && <div>
-                      <div className="text-muted-foreground mb-1">{t('vehicle_detail.specifications.environmental_badge')}</div>
-                      <div className="font-semibold">
-                        <img src={badgeImage} alt={`Badge ${vehicle.environmentalBadge}`} className="w-12 h-12" />
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {(() => {
+                    const specs = [
+                      { icon: Calendar, label: t('vehicle_detail.specifications.year'), value: vehicle.year },
+                      { icon: Gauge, label: t('vehicle_detail.specifications.mileage'), value: `${vehicle.mileage.toLocaleString()} ${vehicle.mileageUnit}` },
+                      { icon: Fuel, label: t('vehicle_detail.specifications.fuel'), value: translateVehicleAttribute('fuel', vehicle.fuel).toUpperCase() },
+                      { icon: Cog, label: t('vehicle_detail.specifications.transmission'), value: translateVehicleAttribute('transmission', vehicle.transmission).toUpperCase() },
+                      { icon: Car, label: t('vehicle_detail.specifications.body_type'), value: translateVehicleAttribute('body_type', vehicle.type).toUpperCase() },
+                      vehicle.color ? { icon: Palette, label: t('vehicle_detail.specifications.color'), value: translateVehicleAttribute('color', vehicle.color).toUpperCase() } : null,
+                      vehicle.doors ? { icon: DoorOpen, label: t('vehicle_detail.specifications.doors'), value: vehicle.doors } : null,
+                      vehicle.seats ? { icon: Users, label: t('vehicle_detail.specifications.seats'), value: vehicle.seats } : null,
+                      vehicle.engineSize ? { icon: Cylinder, label: t('vehicle_detail.specifications.engine_size'), value: `${vehicle.engineSize} ${vehicle.engineSizeUnit}` } : null,
+                      vehicle.enginePower ? { icon: Zap, label: t('vehicle_detail.specifications.engine_power'), value: `${vehicle.enginePower} CV` } : null,
+                    ].filter(Boolean) as { icon: typeof Calendar; label: string; value: React.ReactNode }[];
+
+                    return specs.map((s, i) => {
+                      const Icon = s.icon;
+                      return (
+                        <div
+                          key={i}
+                          className="flex items-start gap-3 rounded-xl bg-slate-50 border border-slate-100 p-4 hover:border-primary/30 hover:bg-white hover:shadow-sm transition-all duration-200"
+                        >
+                          <div className="w-9 h-9 shrink-0 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                            <Icon className="w-[18px] h-[18px]" />
+                          </div>
+                          <div className="min-w-0">
+                            <div className="text-[11px] font-medium uppercase tracking-wider text-slate-500 mb-0.5">{s.label}</div>
+                            <div className="font-bold text-slate-900 text-sm">{s.value}</div>
+                          </div>
+                        </div>
+                      );
+                    });
+                  })()}
+
+                  {badgeImage && (
+                    <div className="flex items-center gap-3 rounded-xl bg-slate-50 border border-slate-100 p-4 hover:border-primary/30 hover:bg-white hover:shadow-sm transition-all duration-200">
+                      <img src={badgeImage} alt={`Badge ${vehicle.environmentalBadge}`} className="w-10 h-10 shrink-0" />
+                      <div className="min-w-0">
+                        <div className="text-[11px] font-medium uppercase tracking-wider text-slate-500 mb-0.5">{t('vehicle_detail.specifications.environmental_badge')}</div>
+                        <div className="font-bold text-slate-900 text-sm">{(vehicle.environmentalBadge || '').toUpperCase()}</div>
                       </div>
-                    </div>}
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -467,18 +474,18 @@ const VehicleDetail = () => {
 
             {/* Reserve Button */}
             {vehicle.status !== 'Reserved' && (
-            <Card className="bg-primary text-primary-foreground">
-              <CardContent className="p-4">
+            <Card className="bg-gradient-to-br from-[#E30613] to-[#B00610] text-white rounded-3xl p-6 shadow-xl shadow-red-500/15 border-0">
+              <CardContent className="p-0">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-2 h-2 bg-primary-foreground rounded-full"></div>
+                  <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
                   <span className="font-semibold">{t('vehicle_detail.reserve.title')}</span>
                 </div>
-                <p className="text-sm mb-4 opacity-90">
+                <p className="text-sm mb-5 text-white/90">
                   {t('vehicle_detail.reserve.description')}
                 </p>
                 <Dialog open={isReservationModalOpen} onOpenChange={setIsReservationModalOpen}>
                   <DialogTrigger asChild>
-                    <Button variant="secondary" className="w-full">
+                    <Button className="w-full bg-white text-[#E30613] hover:bg-red-50 font-bold py-3.5 h-auto rounded-2xl transition-all shadow-md">
                       {t('vehicle_detail.reserve.button')}
                     </Button>
                   </DialogTrigger>
@@ -585,17 +592,17 @@ const VehicleDetail = () => {
             )}
 
             {/* Action Buttons */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-              <Button variant="outline" className="flex items-center gap-2" asChild>
+            <div className="grid grid-cols-1 gap-3 mb-6">
+              <Button variant="outline" className="w-full justify-center gap-2 whitespace-normal h-auto min-h-12 py-2.5 rounded-2xl text-center leading-snug font-semibold bg-white border border-slate-200 text-slate-800 hover:bg-red-50 hover:border-[#E30613] hover:text-[#E30613] transition-all" asChild>
                 <a href={`tel:${getPhoneNumber()}`}>
-                  <Phone className="w-4 h-4" />
+                  <Phone className="w-4 h-4 shrink-0" />
                   {t('vehicle_detail.actions.call_now')}
                 </a>
               </Button>
               <Dialog open={isAppointmentModalOpen} onOpenChange={setIsAppointmentModalOpen}>
                 <DialogTrigger asChild>
-                  <Button variant="outline" className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
+                  <Button variant="outline" className="w-full justify-center gap-2 whitespace-normal h-auto min-h-12 py-2.5 rounded-2xl text-center leading-snug font-semibold bg-white border border-slate-200 text-slate-800 hover:bg-red-50 hover:border-[#E30613] hover:text-[#E30613] transition-all">
+                    <Calendar className="w-4 h-4 shrink-0" />
                     {t('vehicle_detail.actions.schedule_appointment')}
                   </Button>
                 </DialogTrigger>
@@ -858,7 +865,7 @@ const VehicleDetail = () => {
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">{t('legal.privacy_policy.section_2_1.title')}</h3>
               <div className="bg-gray-50 p-4 rounded-lg">
-                <p><strong>{t('legal.privacy_policy.section_2_1.company_name')}:</strong> Luxury Car</p>
+                <p><strong>{t('legal.privacy_policy.section_2_1.company_name')}:</strong> OTO MOTOR</p>
                 <p><strong>{t('legal.privacy_policy.section_2_1.address')}:</strong> {address.full}</p>
                 <p><strong>{t('legal.privacy_policy.section_2_1.phone')}:</strong> {getPhoneNumber()}</p>
               </div>

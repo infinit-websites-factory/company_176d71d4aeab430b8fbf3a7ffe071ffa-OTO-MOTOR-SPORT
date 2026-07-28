@@ -46,8 +46,6 @@ const VehicleCard = ({
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([]);
 
-  console.log('VehicleCard - environmentalBadge:', environmentalBadge, 'for', brand, model);
-
   useEffect(() => {
     if (images.length > 1) {
       const loadPromises = images.map((src, index) => {
@@ -97,21 +95,33 @@ const VehicleCard = ({
 
   return (
     <Link to={`/stock/${id}`} className="block h-full" onClick={handleClick}>
-      <Card className="group overflow-hidden bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-1 flex flex-col h-full cursor-pointer">
-        <div className="relative overflow-hidden rounded-t-xl">
+      <Card className="group overflow-hidden bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-[0_10px_25px_rgba(227,6,19,0.3)] hover:border-red-500 hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full cursor-pointer">
+        <div className="relative overflow-hidden">
           {status === 'Reserved' && <ReservedBanner size="small" />}
           <img
             src={currentImage}
             alt={`${brand} ${model}`}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500"
             style={{ imageRendering: 'auto' }}
           />
+          {/* Gradient for legibility of overlaid badges */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10 pointer-events-none" />
+
+          {/* Environmental (DGT) badge */}
+          {badgeImage && (
+            <img
+              src={badgeImage}
+              alt="Distintivo ambiental"
+              className="absolute top-3 left-3 h-9 w-auto drop-shadow-md"
+            />
+          )}
+
           {images.length > 1 && (
             <div className="absolute inset-x-2 top-1/2 -translate-y-1/2 flex justify-between opacity-0 group-hover:opacity-100 transition-opacity">
               <Button
                 size="icon"
                 variant="secondary"
-                className="h-8 w-8 bg-white/90 hover:bg-white shadow-sm"
+                className="h-8 w-8 bg-white/90 hover:bg-[#E30613] hover:text-white shadow-sm rounded-full transition-colors"
                 onClick={(e) => { e.preventDefault(); e.stopPropagation(); prevImage(); }}
               >
                 <ChevronLeft size={16} />
@@ -119,7 +129,7 @@ const VehicleCard = ({
               <Button
                 size="icon"
                 variant="secondary"
-                className="h-8 w-8 bg-white/90 hover:bg-white shadow-sm"
+                className="h-8 w-8 bg-white/90 hover:bg-[#E30613] hover:text-white shadow-sm rounded-full transition-colors"
                 onClick={(e) => { e.preventDefault(); e.stopPropagation(); nextImage(); }}
               >
                 <ChevronRight size={16} />
@@ -127,33 +137,44 @@ const VehicleCard = ({
             </div>
           )}
           {images.length > 1 && (
-            <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded-md">
+            <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-foreground text-xs font-medium px-2 py-1 rounded-full shadow-sm transition-colors group-hover:bg-[#E30613] group-hover:text-white">
               {currentImageIndex + 1}/{images.length}
             </div>
           )}
+
+          {/* Price badge */}
+          <div className="absolute bottom-3 left-3 bg-primary text-primary-foreground font-bold text-lg px-3.5 py-1.5 rounded-lg shadow-lg">
+            {formatPrice(price)}
+          </div>
         </div>
 
-        <CardContent className="p-4 flex flex-col flex-1">
-          <div className="flex justify-between items-start mb-2">
-            <div>
-              <h3 className="font-bold text-lg text-foreground">{brand} {model}</h3>
-              <p className="text-muted-foreground text-sm">{year} · {translateVehicleAttribute('body_type', type)}</p>
+        <CardContent className="p-5 flex flex-col flex-1">
+          <div className="mb-4">
+            <h3 className="font-bold text-lg text-foreground leading-tight group-hover:text-primary transition-colors">{brand} {model}</h3>
+            <p className="text-muted-foreground text-sm mt-0.5">{year} · {translateVehicleAttribute('body_type', type)}</p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 mb-5">
+            <div className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2 text-xs text-gray-600">
+              <Gauge size={15} className="text-primary shrink-0" />
+              <span className="truncate">{mileage.toLocaleString()} {mileageUnit}</span>
             </div>
-            <div className="text-right">
-              <p className="text-lg font-bold text-primary">{formatPrice(price)}</p>
+            <div className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2 text-xs text-gray-600">
+              <Fuel size={15} className="text-primary shrink-0" />
+              <span className="truncate">{translateVehicleAttribute('fuel', fuel)}</span>
+            </div>
+            <div className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2 text-xs text-gray-600">
+              <Settings2 size={15} className="text-primary shrink-0" />
+              <span className="truncate">{translateVehicleAttribute('transmission', transmission)}</span>
+            </div>
+            <div className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2 text-xs text-gray-600">
+              <Calendar size={15} className="text-primary shrink-0" />
+              <span className="truncate">{year}</span>
             </div>
           </div>
 
           <div className="mt-auto">
-            <div className="flex items-end justify-between gap-4 mb-4">
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-muted-foreground flex-1">
-                <div className="flex items-center gap-1.5"><Gauge size={14} className="text-gray-400 shrink-0" />{mileage.toLocaleString()} {mileageUnit}</div>
-                <div className="flex items-center gap-1.5"><Fuel size={14} className="text-gray-400 shrink-0" />{translateVehicleAttribute('fuel', fuel)}</div>
-                <div className="flex items-center gap-1.5"><Settings2 size={14} className="text-gray-400 shrink-0" />{translateVehicleAttribute('transmission', transmission)}</div>
-                <div className="flex items-center gap-1.5"><Calendar size={14} className="text-gray-400 shrink-0" />{year}</div>
-              </div>
-            </div>
-            <Button className="w-full" variant="outline">
+            <Button className="w-full rounded-lg group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-colors" variant="outline">
               <Eye size={16} className="mr-2" />
               {t('common.view_details')}
             </Button>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FAQ from "@/components/FAQ";
@@ -11,8 +12,21 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
-import { CheckCircle2, CheckCircle, ArrowRight, ArrowLeft, Shield, Clock, Sparkles } from "lucide-react";
+import { CheckCircle2, CheckCircle, ArrowRight, ArrowLeft, Shield, Clock, Sparkles, Loader2 } from "lucide-react";
 import financingBg from "@/assets/img5.jpg";
+import financingCars from "@/assets/oto-motor-financing-cars.jpg";
+
+const CAR_WAITS_BADGE: Record<string, string> = {
+  es: "Tu coche ideal te espera",
+  en: "Your ideal car awaits",
+  fr: "Votre voiture idéale vous attend",
+};
+
+const FINANCING_BADGE: Record<string, string> = {
+  es: "Tasas rápidas y flexibles",
+  en: "Quick & Flexible Rates",
+  fr: "Taux rapides et flexibles",
+};
 import {
   Dialog,
   DialogContent,
@@ -20,7 +34,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { CONTACT_FORM_API_URL, PROFILE_ID, fetchCars, transformApiCarToVehicle, Vehicle } from "@/services/carsApi";
+import { CONTACT_FORM_API_URL, PROFILE_ID, fetchCarsPaginated, transformApiCarToVehicle, Vehicle } from "@/services/carsApi";
 
 const Financing = () => {
   const { toast } = useToast();
@@ -39,8 +53,7 @@ const Financing = () => {
   const [openPrivacyModal, setOpenPrivacyModal] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
-  const [loadingVehicles, setLoadingVehicles] = useState(true);
+  const [vehicleSelectOpen, setVehicleSelectOpen] = useState(false);
   const [formData, setFormData] = useState({
     vehiculoId: "",
     entradaInicial: "",
@@ -67,57 +80,54 @@ const Financing = () => {
 
   const totalSteps = 5;
 
+  // Server-side paginated vehicle list for the dropdown (30 at a time).
+  // We never load every car at once — the next page loads as the user scrolls.
+  const VEHICLE_PAGE_SIZE = 30;
+  const {
+    data: vehiclesData,
+    isLoading: loadingVehicles,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['financing-vehicles'],
+    queryFn: ({ pageParam = 1 }) => fetchCarsPaginated({ page: pageParam, size: VEHICLE_PAGE_SIZE }),
+    getNextPageParam: (lastPage) => (lastPage.page < lastPage.pages ? lastPage.page + 1 : undefined),
+    initialPageParam: 1,
+    staleTime: 5 * 60 * 1000,
+    retry: 2,
+  });
+
+  const vehicles: Vehicle[] = vehiclesData
+    ? vehiclesData.pages.flatMap((p) => p.items.map(transformApiCarToVehicle))
+    : [];
+  const totalVehicles = vehiclesData?.pages[0]?.total ?? 0;
+
+  // Infinite scroll inside the (Radix) dropdown: when the user scrolls near the
+  // bottom of the open list, fetch the next page and append it.
   useEffect(() => {
-    const loadVehicles = async () => {
-      try {
-        const apiResponse = await fetchCars();
-        const transformedVehicles = apiResponse.items.map(transformApiCarToVehicle);
-
-        // If no vehicles available, add placeholder option with dummy data
-        if (transformedVehicles.length === 0) {
-          setVehicles([
-            {
-              id: "placeholder-1",
-              brand: "BMW",
-              model: "Serie 3",
-              year: 2020,
-              price: 25000,
-              mileage: 45000,
-              fuel: "Diésel",
-              transmission: "Automático",
-              type: "Berlina",
-              images: [],
-              updatedAt: ""
-            }
-          ]);
-        } else {
-          setVehicles(transformedVehicles);
+    if (!vehicleSelectOpen) return;
+    let cleanup: (() => void) | undefined;
+    const timer = window.setTimeout(() => {
+      const viewport = document.querySelector('[data-radix-select-viewport]') as HTMLElement | null;
+      if (!viewport) return;
+      const onScroll = () => {
+        if (
+          viewport.scrollTop + viewport.clientHeight >= viewport.scrollHeight - 120 &&
+          hasNextPage &&
+          !isFetchingNextPage
+        ) {
+          fetchNextPage();
         }
-      } catch (error) {
-        console.error('Error loading vehicles:', error);
-        // Add placeholder option with dummy data when error occurs
-        setVehicles([
-          {
-            id: "placeholder-1",
-            brand: "BMW",
-            model: "Serie 3",
-            year: 2020,
-            price: 25000,
-            mileage: 45000,
-            fuel: "Diésel",
-            transmission: "Automático",
-            type: "Berlina",
-            images: [],
-            updatedAt: ""
-          }
-        ]);
-      } finally {
-        setLoadingVehicles(false);
-      }
+      };
+      viewport.addEventListener('scroll', onScroll);
+      cleanup = () => viewport.removeEventListener('scroll', onScroll);
+    }, 60);
+    return () => {
+      window.clearTimeout(timer);
+      cleanup?.();
     };
-
-    loadVehicles();
-  }, []);
+  }, [vehicleSelectOpen, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   const plazoPagoOptions = ["12", "18", "24", "36", "48", "60", "72", "84", "96", "108", "120"];
 
@@ -343,65 +353,81 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
 
       <main className="flex-1">
         {/* Hero Section with Form */}
-        <section className="relative pt-8 pb-20 px-4 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-blue-50/40">
+        <section className="relative pt-12 pb-20 px-4 overflow-hidden bg-gradient-to-br from-[#F8F9FA] via-white to-[#FFF5F0]">
           {/* Dot pattern */}
-          <div className="absolute inset-0 opacity-[0.4]" style={{ backgroundImage: 'radial-gradient(circle, #d1d5db 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+          <div className="absolute inset-0 opacity-[0.4]" style={{ backgroundImage: 'radial-gradient(circle, #e5e7eb 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+          {/* Soft ambient glow behind the form for depth */}
+          <div className="absolute bottom-0 right-0 w-[420px] h-[420px] bg-[#E52B28]/8 rounded-full blur-3xl translate-y-1/4 translate-x-1/4 pointer-events-none" />
 
           <div className="container mx-auto max-w-7xl relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-              {/* Left side - Title, subtitle, and benefits */}
-              <div className="lg:col-span-2 space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Center column - Value proposition */}
+              <div className="order-2 lg:col-span-7 space-y-6">
                 <div className="space-y-4">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/8 border border-primary/15 text-primary text-sm font-medium">
-                    <Sparkles className="w-4 h-4" />
-                    {t('financing_page.hero.title')}
+                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">
+                    <span aria-hidden="true">⚡</span>
+                    {FINANCING_BADGE[language] || FINANCING_BADGE.en}
                   </div>
-                  <h1 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                  <h1 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
                     {t('financing_page.hero.title')}
                   </h1>
-                  <p className="text-xl text-muted-foreground leading-relaxed">
+                  {/* Red accent bar */}
+                  <div className="h-1.5 w-16 rounded-full bg-primary" />
+                  <p className="text-lg text-muted-foreground leading-relaxed">
                     {t('financing_page.hero.subtitle')}
                   </p>
                 </div>
 
-                {/* Benefits checklist */}
-                <div className="space-y-5">
-                  <div className="flex items-start gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-colors">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Shield className="w-5 h-5 text-primary" />
+                {/* Benefits — compact rows in one container */}
+                <div className="rounded-2xl bg-white border border-red-200/70 shadow-[0_10px_30px_rgba(227,6,19,0.28)] divide-y divide-gray-100 overflow-hidden">
+                  {[
+                    { icon: Shield, key: 'reduced_payments' },
+                    { icon: Clock, key: 'fast_approval' },
+                    { icon: CheckCircle2, key: 'no_surprises' },
+                  ].map(({ icon: Icon, key }) => (
+                    <div key={key} className="flex items-center gap-4 p-4 hover:bg-red-50/40 transition-colors">
+                      <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br from-[#E52B28]/15 to-[#E52B28]/5 border border-[#E52B28]/20 flex items-center justify-center text-[#E52B28]">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="font-bold text-base text-foreground leading-snug">{t(`financing_page.benefits.${key}.title`)}</h3>
+                        <p className="text-slate-500 text-sm leading-snug">{t(`financing_page.benefits.${key}.description`)}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-foreground mb-0.5">{t('financing_page.benefits.reduced_payments.title')}</h3>
-                      <p className="text-gray-400 text-sm">{t('financing_page.benefits.reduced_payments.description')}</p>
-                    </div>
-                  </div>
+                  ))}
+                </div>
+              </div>
 
-                  <div className="flex items-start gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-colors">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Clock className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-foreground mb-0.5">{t('financing_page.benefits.fast_approval.title')}</h3>
-                      <p className="text-gray-400 text-sm">{t('financing_page.benefits.fast_approval.description')}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-colors">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <CheckCircle2 className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-foreground mb-0.5">{t('financing_page.benefits.no_surprises.title')}</h3>
-                      <p className="text-gray-400 text-sm">{t('financing_page.benefits.no_surprises.description')}</p>
-                    </div>
+              {/* Left column - Car visual */}
+              <div className="order-1 lg:col-span-5 hidden lg:block relative before:absolute before:-inset-3 before:bg-gradient-to-tr before:from-[#E52B28]/25 before:to-transparent before:blur-2xl before:rounded-3xl before:-z-10">
+                <div className="relative rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 border border-transparent hover:border-red-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_50px_-10px_rgba(227,6,19,0.4)] transition-all duration-300 ease-out cursor-pointer">
+                  <img
+                    src={financingCars}
+                    alt="OTO MOTOR"
+                    className="object-cover object-right h-[520px] w-full"
+                  />
+                  {/* Legibility gradient at the bottom */}
+                  <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+                  {/* Floating badge - bottom right (clears the baked-in OTO watermark) */}
+                  <div className="absolute bottom-4 right-4">
+                    <span className="inline-flex items-center gap-2 rounded-full px-4 py-2 shadow-lg text-sm font-bold text-white backdrop-blur-md bg-black/40">
+                      <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
+                      {CAR_WAITS_BADGE[language] || CAR_WAITS_BADGE.es}
+                    </span>
                   </div>
                 </div>
               </div>
 
-              {/* Right side - Form */}
-              <div className="lg:col-span-3">
-                <Card className="bg-white shadow-sm border border-gray-100 rounded-xl">
+            </div>
+          </div>
+        </section>
+        {/* Financing form */}
+        <section className="relative px-4 pb-20 bg-gradient-to-b from-[#FFF5F0] to-background">
+          <div className="relative group max-w-2xl mx-auto">
+            {/* Even red halo like the "Call us" card */}
+            <div className="absolute -inset-1 bg-[#E52B28]/25 rounded-3xl blur-xl -z-10" />
+            <Card className="relative bg-white rounded-2xl border border-red-200/70 hover:border-red-500 shadow-[0_10px_30px_rgba(227,6,19,0.28)] hover:shadow-[0_16px_40px_rgba(227,6,19,0.42)] hover:-translate-y-1.5 transition-all duration-300 ease-out z-10">
                   <CardHeader className="space-y-4">
                     {currentStep === 1 && (
                       <div className="space-y-2">
@@ -457,7 +483,12 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                       <form onSubmit={handleNext} className="space-y-6">
                         <div className="space-y-6 animate-fade-in">
                           <div className="space-y-2">
-                            <Label htmlFor="vehiculoId" className="text-gray-600">{t('financing_page.form.vehicle_select')} *</Label>
+                            <Label htmlFor="vehiculoId" className="text-gray-600">
+                              {t('financing_page.form.vehicle_select')} *
+                              {totalVehicles > 0 && (
+                                <span className="ml-1 text-muted-foreground font-normal">({totalVehicles})</span>
+                              )}
+                            </Label>
                             {loadingVehicles ? (
                               <div className="text-center py-8 text-muted-foreground">
                                 {t('financing_page.form.loading_vehicles')}
@@ -469,6 +500,7 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                                   handleSelectChange("vehiculoId", value);
                                   setErrors({ ...errors, vehiculoId: "" });
                                 }}
+                                onOpenChange={setVehicleSelectOpen}
                                 required
                               >
                                 <SelectTrigger className={`bg-gray-50 data-[placeholder]:text-muted-foreground ${errors.vehiculoId ? "border-red-500" : "border-gray-200"}`}>
@@ -480,6 +512,11 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                                       {vehicle.brand} {vehicle.model} ({vehicle.year}) - {formatPrice(vehicle.price)}
                                     </SelectItem>
                                   ))}
+                                  {isFetchingNextPage && (
+                                    <div className="flex justify-center py-2 text-muted-foreground">
+                                      <Loader2 className="h-4 w-4 animate-spin" />
+                                    </div>
+                                  )}
                                 </SelectContent>
                               </Select>
                             )}
@@ -533,7 +570,7 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                             const vehiclePrice = selectedVehicle.price;
 
                             return (
-                              <div className="p-3 bg-orange-50 rounded-lg border border-orange-200">
+                              <div className="p-3 bg-red-50 rounded-lg border border-red-200">
                                 <div className="flex justify-between items-center text-sm">
                                   <span className="text-muted-foreground">
                                     {selectedVehicle.brand} {selectedVehicle.model} · {formatPrice(vehiclePrice)}
@@ -652,7 +689,7 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                             const loanAmount = Math.max(0, vehiclePrice - downPayment);
 
                             return (
-                              <div className="p-3 bg-orange-50 rounded-lg border border-orange-200">
+                              <div className="p-3 bg-red-50 rounded-lg border border-red-200">
                                 <div className="flex justify-between items-center text-sm">
                                   <span className="text-muted-foreground">
                                     {selectedVehicle.brand} {selectedVehicle.model} · {formatPrice(vehiclePrice)}
@@ -813,7 +850,7 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                             const loanAmount = Math.max(0, vehiclePrice - downPayment);
 
                             return (
-                              <div className="p-3 bg-orange-50 rounded-lg border border-orange-200">
+                              <div className="p-3 bg-red-50 rounded-lg border border-red-200">
                                 <div className="flex justify-between items-center text-sm">
                                   <span className="text-muted-foreground">
                                     {selectedVehicle.brand} {selectedVehicle.model} · {formatPrice(vehiclePrice)}
@@ -939,7 +976,7 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                             const loanAmount = Math.max(0, vehiclePrice - downPayment);
 
                             return (
-                              <div className="p-3 bg-orange-50 rounded-lg border border-orange-200">
+                              <div className="p-3 bg-red-50 rounded-lg border border-red-200">
                                 <div className="flex justify-between items-center text-sm">
                                   <span className="text-muted-foreground">
                                     {selectedVehicle.brand} {selectedVehicle.model} · {formatPrice(vehiclePrice)}
@@ -1166,8 +1203,6 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                     )}
                   </CardContent>
                 </Card>
-              </div>
-            </div>
           </div>
         </section>
       </main>
@@ -1186,7 +1221,7 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">{t('legal.privacy_policy.section_2_1.title')}</h3>
               <div className="bg-gray-50 p-4 rounded-lg">
-                <p><strong>{t('legal.privacy_policy.section_2_1.company_name')}:</strong> Luxury Car</p>
+                <p><strong>{t('legal.privacy_policy.section_2_1.company_name')}:</strong> OTO MOTOR</p>
                 <p><strong>{t('legal.privacy_policy.section_2_1.address')}:</strong> {address.full}</p>
                 <p><strong>{t('legal.privacy_policy.section_2_1.phone')}:</strong> {getPhoneNumber()}</p>
               </div>
