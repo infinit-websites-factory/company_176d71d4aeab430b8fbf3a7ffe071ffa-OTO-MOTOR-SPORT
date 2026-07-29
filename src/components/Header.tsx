@@ -33,7 +33,7 @@ const Header = () => {
   return (
     <header className="bg-white border-b border-gray-100 shadow-sm">
       {/* Top bar: contact info */}
-      <div className="bg-gradient-to-br from-primary via-primary to-red-600">
+      <div className="bg-black">
         <div className="container mx-auto max-w-7xl px-4 py-2.5">
           <div className="flex items-center justify-between text-sm text-white/85">
             <div className="hidden md:flex items-center gap-6">
@@ -104,7 +104,7 @@ const Header = () => {
                   href={link.href}
                   className={`px-3 py-2 text-[17px] font-bold tracking-tight whitespace-nowrap rounded-lg transition-all duration-200 ${
                     isActive
-                      ? "text-primary bg-primary/10"
+                      ? "text-white bg-black"
                       : "text-gray-800 hover:text-primary hover:bg-primary/5"
                   }`}
                 >
@@ -150,7 +150,7 @@ const Header = () => {
                   href={link.href}
                   className={`text-lg font-bold tracking-tight px-3 py-3.5 rounded-lg transition-colors ${
                     isActive
-                      ? "text-primary bg-primary/10"
+                      ? "text-white bg-black"
                       : "text-gray-800 hover:text-primary hover:bg-primary/5"
                   }`}
                   onClick={() => setIsOpen(false)}

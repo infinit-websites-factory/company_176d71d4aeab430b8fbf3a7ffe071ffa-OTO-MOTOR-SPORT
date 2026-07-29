@@ -42,23 +42,23 @@ const MAPS_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53
 
 const ADDRESSES: Record<Language, AddressInfo> = {
   es: {
-    street: "C. Cardeñas, 27B",
-    city: "28690 Brunete, Madrid, España",
-    full: "C. Cardeñas, 27B, 28690 Brunete, Madrid, España",
+    street: "C/ Islas Cíes, 4",
+    city: "28970 Humanes de Madrid",
+    full: "C/ Islas Cíes, 4, 28970 Humanes de Madrid",
     mapsUrl: MAPS_URL,
     mapsEmbedUrl: MAPS_EMBED_URL
   },
   en: {
-    street: "C. Cardeñas, 27B",
-    city: "28690 Brunete, Madrid, Spain",
-    full: "C. Cardeñas, 27B, 28690 Brunete, Madrid, Spain",
+    street: "C/ Islas Cíes, 4",
+    city: "28970 Humanes de Madrid",
+    full: "C/ Islas Cíes, 4, 28970 Humanes de Madrid",
     mapsUrl: MAPS_URL,
     mapsEmbedUrl: MAPS_EMBED_URL
   },
   fr: {
-    street: "C. Cardeñas, 27B",
-    city: "28690 Brunete, Madrid, Espagne",
-    full: "C. Cardeñas, 27B, 28690 Brunete, Madrid, Espagne",
+    street: "C/ Islas Cíes, 4",
+    city: "28970 Humanes de Madrid",
+    full: "C/ Islas Cíes, 4, 28970 Humanes de Madrid",
     mapsUrl: MAPS_URL,
     mapsEmbedUrl: MAPS_EMBED_URL
   }
