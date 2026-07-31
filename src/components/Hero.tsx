@@ -7,8 +7,7 @@ import fachada from "@/assets/oto-motor-fachada.jpg";
 const Hero = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-  const { getCityName, t } = useLanguage();
-  const cityName = getCityName();
+  const { t } = useLanguage();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,12 +31,6 @@ const Hero = () => {
       <div className="absolute inset-0 flex items-center">
         <div className="container mx-auto max-w-7xl px-4 w-full">
           <div className="max-w-xl">
-          {/* Location badge */}
-          <span className="inline-flex items-center gap-1.5 bg-primary/25 border border-primary/40 text-red-100 font-semibold px-3 py-1 rounded-full text-xs w-fit mb-5 backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
-            {t("hero.subtitle")} {cityName}
-          </span>
-
           {/* Headline */}
           <h1 className="text-white font-extrabold text-4xl lg:text-5xl leading-tight mb-4 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
             {t("hero.title")}

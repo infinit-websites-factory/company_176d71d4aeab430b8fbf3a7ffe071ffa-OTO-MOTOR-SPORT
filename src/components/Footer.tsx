@@ -187,11 +187,9 @@ const Footer = () => {
             <ul className="space-y-2 text-white/85 text-base">
               {getOpeningHours().map((entry, index) => (
                 <li key={index} className="flex items-start gap-2">
-                  <Clock size={16} className="text-white mt-0.5 shrink-0" />
-                  <span className="flex-1 flex justify-between gap-3">
-                    <span className="text-white font-medium">{entry.label}</span>
-                    <span className={entry.closed ? "text-white/60" : ""}>{entry.value}</span>
-                  </span>
+                  <Clock size={16} className="text-white mt-1 shrink-0" />
+                  <span className="w-24 shrink-0 text-white font-medium">{entry.label}</span>
+                  <span className={entry.closed ? "text-white/60" : ""}>{entry.value}</span>
                 </li>
               ))}
             </ul>
