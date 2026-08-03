@@ -18,10 +18,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 20% 10%;
 
-    /* Dealer's brand color — replaced during conversion */
-    --primary: 357 92% 47%;
+    /* Dealer's brand color — black & white palette */
+    --primary: 0 0% 7%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 357 92% 40%;
+    --primary-hover: 0 0% 20%;
 
     --secondary: 210 15% 95%;
     --secondary-foreground: 220 20% 10%;
@@ -29,7 +29,7 @@
     --muted: 210 15% 95%;
     --muted-foreground: 220 10% 45%;
 
-    --accent: 357 92% 47%;
+    --accent: 0 0% 7%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -37,7 +37,7 @@
 
     --border: 220 13% 90%;
     --input: 220 13% 90%;
-    --ring: 357 92% 47%;
+    --ring: 0 0% 7%;
 
     /* Navigation colors */
     --nav-background: 0 0% 100%;
@@ -52,12 +52,12 @@
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 220 20% 10%;
-    --sidebar-primary: 357 92% 47%;
+    --sidebar-primary: 0 0% 7%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 210 15% 95%;
     --sidebar-accent-foreground: 220 20% 10%;
     --sidebar-border: 220 13% 90%;
-    --sidebar-ring: 357 92% 47%;
+    --sidebar-ring: 0 0% 7%;
   }
 }
 

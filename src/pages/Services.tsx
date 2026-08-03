@@ -25,8 +25,7 @@ const SELL_HEADLINE: Record<string, string> = {
 };
 
 const Services = () => {
-  const { getCityName, t, language } = useLanguage();
-  const cityName = getCityName();
+  const { t, language } = useLanguage();
   const mainServices = [
     {
       icon: Car,
@@ -71,9 +70,9 @@ const Services = () => {
             {t('services_page.hero.title')}
           </h1>
           <p className="text-lg text-gray-200 leading-relaxed max-w-2xl mx-auto drop-shadow">
-            {`${t('services_page.hero.subtitle')} ${cityName}.`}
+            {`${t('services_page.hero.subtitle')}.`}
           </p>
-          <div className="bg-[#E52B28] h-1 w-16 mx-auto rounded-full mt-4" />
+          <div className="bg-[#111111] h-1 w-16 mx-auto rounded-full mt-4" />
         </div>
       </section>
 
@@ -86,7 +85,7 @@ const Services = () => {
               return (
                 <div
                   key={index}
-                  className="group bg-white rounded-xl border border-gray-100 shadow-lg p-7 hover:shadow-[0_10px_25px_rgba(227,6,19,0.3)] hover:border-red-500 hover:-translate-y-1 transition-all duration-300"
+                  className="group bg-white rounded-xl border border-gray-100 shadow-lg p-7 hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:border-gray-900 hover:-translate-y-1 transition-all duration-300"
                 >
                   <div className={`w-16 h-16 rounded-xl ${service.iconBg} flex items-center justify-center mb-5 mx-auto`}>
                     <IconComponent className="w-8 h-8" />
@@ -120,21 +119,21 @@ const Services = () => {
               </div>
 
               {/* Car image — pops up on hover */}
-              <div className="relative transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.03] before:absolute before:-inset-2 before:bg-[#E52B28]/20 before:blur-2xl before:rounded-3xl before:-z-10">
+              <div className="relative transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.03] before:absolute before:-inset-2 before:bg-[#111111]/20 before:blur-2xl before:rounded-3xl before:-z-10">
                 <img
                   src={sellCarsPhoto}
                   alt={t('services_page.alt_texts.sell')}
                   className="w-full h-[450px] object-cover rounded-3xl shadow-2xl shadow-black/20 ring-1 ring-black/5"
                 />
                 {/* Accent badge overlay */}
-                <div className="absolute -top-3 -left-3 bg-[#E52B28] text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
+                <div className="absolute -top-3 -left-3 bg-[#111111] text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
                   {SELL_IMAGE_TAG[language] || SELL_IMAGE_TAG.es}
                 </div>
               </div>
             </div>
             <div className="flex items-center bg-gray-50 rounded-2xl">
               <div className="px-8 py-16 lg:px-16 lg:py-20 space-y-6">
-                <div className="bg-red-50 text-[#E52B28] text-xs font-semibold px-3.5 py-1.5 rounded-full border border-red-100/80 inline-flex items-center gap-1.5">
+                <div className="bg-white text-[#111111] text-xs font-semibold px-3.5 py-1.5 rounded-full border border-gray-200 inline-flex items-center gap-1.5">
                   {SELL_PILL[language] || SELL_PILL.es}
                 </div>
                 <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">

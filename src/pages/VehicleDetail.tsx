@@ -342,10 +342,10 @@ const VehicleDetail = () => {
               {vehicle.brand} {vehicle.model}
             </h1>
             <div className="flex flex-wrap gap-2 mt-2">
-              <Badge variant="secondary" className="bg-red-100 text-red-700 border border-red-200 hover:bg-red-100 font-medium">{vehicle.year}</Badge>
-              <Badge variant="secondary" className="bg-red-100 text-red-700 border border-red-200 hover:bg-red-100 font-medium">{translateVehicleAttribute('transmission', vehicle.transmission)}</Badge>
-              <Badge variant="secondary" className="bg-red-100 text-red-700 border border-red-200 hover:bg-red-100 font-medium">{translateVehicleAttribute('fuel', vehicle.fuel)}</Badge>
-              <Badge variant="secondary" className="bg-red-100 text-red-700 border border-red-200 hover:bg-red-100 font-medium">{vehicle.mileage.toLocaleString()} {vehicle.mileageUnit}</Badge>
+              <Badge variant="secondary" className="bg-gray-100 text-gray-800 border border-gray-200 hover:bg-gray-100 font-medium">{vehicle.year}</Badge>
+              <Badge variant="secondary" className="bg-gray-100 text-gray-800 border border-gray-200 hover:bg-gray-100 font-medium">{translateVehicleAttribute('transmission', vehicle.transmission)}</Badge>
+              <Badge variant="secondary" className="bg-gray-100 text-gray-800 border border-gray-200 hover:bg-gray-100 font-medium">{translateVehicleAttribute('fuel', vehicle.fuel)}</Badge>
+              <Badge variant="secondary" className="bg-gray-100 text-gray-800 border border-gray-200 hover:bg-gray-100 font-medium">{vehicle.mileage.toLocaleString()} {vehicle.mileageUnit}</Badge>
             </div>
           </div>
           <Button variant="outline" size="sm" onClick={handleShare} className="flex items-center gap-2 border-primary/40 text-primary hover:bg-primary hover:text-white hover:border-primary transition-colors">
@@ -363,14 +363,14 @@ const VehicleDetail = () => {
               <img src={vehicle.images[currentImageIndex]} alt={`${vehicle.brand} ${vehicle.model}`} className="w-full h-full object-cover" />
               
               {vehicle.images.length > 1 && <>
-                  <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/90 text-foreground opacity-0 group-hover:opacity-100 hover:bg-[#E30613] hover:text-white transition-all">
+                  <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/90 text-foreground opacity-0 group-hover:opacity-100 hover:bg-[#111111] hover:text-white transition-all">
                     <ChevronLeft className="w-5 h-5" />
                   </button>
-                  <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/90 text-foreground opacity-0 group-hover:opacity-100 hover:bg-[#E30613] hover:text-white transition-all">
+                  <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/90 text-foreground opacity-0 group-hover:opacity-100 hover:bg-[#111111] hover:text-white transition-all">
                     <ChevronRight className="w-5 h-5" />
                   </button>
                   
-                  <div className="absolute bottom-4 right-4 bg-black/50 text-white px-2 py-1 rounded text-sm transition-colors hover:bg-[#E30613]">
+                  <div className="absolute bottom-4 right-4 bg-black/50 text-white px-2 py-1 rounded text-sm transition-colors hover:bg-[#111111]">
                     {currentImageIndex + 1} / {vehicle.images.length}
                   </div>
                 </>}
@@ -474,7 +474,7 @@ const VehicleDetail = () => {
 
             {/* Reserve Button */}
             {vehicle.status !== 'Reserved' && (
-            <Card className="bg-gradient-to-br from-[#E30613] to-[#B00610] text-white rounded-3xl p-6 shadow-xl shadow-red-500/15 border-0">
+            <Card className="bg-gradient-to-br from-[#111111] to-[#000000] text-white rounded-3xl p-6 shadow-xl shadow-black/20 border-0">
               <CardContent className="p-0">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
@@ -485,7 +485,7 @@ const VehicleDetail = () => {
                 </p>
                 <Dialog open={isReservationModalOpen} onOpenChange={setIsReservationModalOpen}>
                   <DialogTrigger asChild>
-                    <Button className="w-full bg-white text-[#E30613] hover:bg-red-50 font-bold py-3.5 h-auto rounded-2xl transition-all shadow-md">
+                    <Button className="w-full bg-white text-[#111111] hover:bg-gray-100 font-bold py-3.5 h-auto rounded-2xl transition-all shadow-md">
                       {t('vehicle_detail.reserve.button')}
                     </Button>
                   </DialogTrigger>
@@ -538,7 +538,7 @@ const VehicleDetail = () => {
                           <Label htmlFor="reservationPhone" className="text-gray-600">{t('vehicle_detail.form.phone')}</Label>
                           <div className="flex">
                             <div className="flex items-center px-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-md">
-                              <span className="text-sm text-red-600 font-semibold">{getFlag()}</span>
+                              <span className="text-sm text-foreground font-semibold">{getFlag()}</span>
                             </div>
                             <Input
                               id="reservationPhone"
@@ -593,7 +593,7 @@ const VehicleDetail = () => {
 
             {/* Action Buttons */}
             <div className="grid grid-cols-1 gap-3 mb-6">
-              <Button variant="outline" className="w-full justify-center gap-2 whitespace-normal h-auto min-h-12 py-2.5 rounded-2xl text-center leading-snug font-semibold bg-white border border-slate-200 text-slate-800 hover:bg-red-50 hover:border-[#E30613] hover:text-[#E30613] transition-all" asChild>
+              <Button variant="outline" className="w-full justify-center gap-2 whitespace-normal h-auto min-h-12 py-2.5 rounded-2xl text-center leading-snug font-semibold bg-white border border-slate-200 text-slate-800 hover:bg-gray-100 hover:border-[#111111] hover:text-[#111111] transition-all" asChild>
                 <a href={`tel:${getPhoneNumber()}`}>
                   <Phone className="w-4 h-4 shrink-0" />
                   {t('vehicle_detail.actions.call_now')}
@@ -601,7 +601,7 @@ const VehicleDetail = () => {
               </Button>
               <Dialog open={isAppointmentModalOpen} onOpenChange={setIsAppointmentModalOpen}>
                 <DialogTrigger asChild>
-                  <Button variant="outline" className="w-full justify-center gap-2 whitespace-normal h-auto min-h-12 py-2.5 rounded-2xl text-center leading-snug font-semibold bg-white border border-slate-200 text-slate-800 hover:bg-red-50 hover:border-[#E30613] hover:text-[#E30613] transition-all">
+                  <Button variant="outline" className="w-full justify-center gap-2 whitespace-normal h-auto min-h-12 py-2.5 rounded-2xl text-center leading-snug font-semibold bg-white border border-slate-200 text-slate-800 hover:bg-gray-100 hover:border-[#111111] hover:text-[#111111] transition-all">
                     <Calendar className="w-4 h-4 shrink-0" />
                     {t('vehicle_detail.actions.schedule_appointment')}
                   </Button>
@@ -655,7 +655,7 @@ const VehicleDetail = () => {
                         <Label htmlFor="appointmentPhone" className="text-gray-600">{t('vehicle_detail.form.phone')}</Label>
                         <div className="flex">
                           <div className="flex items-center px-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-md">
-                            <span className="text-sm text-red-600 font-semibold">{getFlag()}</span>
+                            <span className="text-sm text-foreground font-semibold">{getFlag()}</span>
                           </div>
                           <Input
                             id="appointmentPhone"

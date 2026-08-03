@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CheckCircle2, ArrowRight, ArrowLeft, CheckCircle, Shield, Clock, Sparkles, Car, FileCheck2, Banknote, ArrowLeftRight, CalendarCheck } from "lucide-react";
-import sellBg from "@/assets/img1.jpg";
+import sellHero from "@/assets/oto-motor-grille.jpg";
 import {
   Dialog,
   DialogContent,
@@ -278,54 +278,64 @@ Kilometraje: ${formData.kilometraje} km`;
 
       <main className="flex-1">
         {/* Hero Section with Form */}
-        <section className="relative pt-12 pb-20 px-4 overflow-hidden bg-gradient-to-br from-[#F8F9FA] via-white to-[#FFF5F0]">
+        <section className="relative pb-20 overflow-hidden bg-gradient-to-br from-[#F8F9FA] via-white to-[#F8F9FA]">
           {/* Dot pattern */}
           <div className="absolute inset-0 opacity-[0.4]" style={{ backgroundImage: 'radial-gradient(circle, #e5e7eb 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
 
-          <div className="container mx-auto max-w-7xl relative z-10">
-            {/* Centered header */}
-            <div className="text-center max-w-2xl mx-auto mb-10">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-4">
+          {/* Full-bleed hero image band */}
+          <div className="relative z-10 w-full overflow-hidden mb-12 border-b border-black/10">
+            {/* Grayscale photo background */}
+            <div
+              className="absolute inset-0 bg-cover bg-center grayscale scale-105"
+              style={{ backgroundImage: `url(${sellHero})` }}
+            />
+            {/* Dark gradient overlay for legibility */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
+            <div className="relative z-10 text-center px-4 py-24 md:py-32 max-w-3xl mx-auto">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 border border-white/25 text-white text-sm font-medium mb-4 backdrop-blur-sm">
                 <Car className="w-4 h-4" />
                 {SELL_HERO_BADGE[language] || SELL_HERO_BADGE.es}
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground leading-tight mb-4">
+              <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight mb-4 drop-shadow-lg">
                 {t("sell_page.hero.title")}
               </h1>
-              <p className="text-xl text-muted-foreground leading-relaxed">
+              <p className="text-xl text-gray-200 leading-relaxed drop-shadow max-w-2xl mx-auto">
                 {t("sell_page.hero.subtitle")}
               </p>
             </div>
+          </div>
 
+          {/* Content container */}
+          <div className="container mx-auto max-w-7xl px-4 relative z-10">
             {/* Benefits below the form */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto mt-12">
-              <div className="flex flex-col items-center text-center bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-red-500 hover:shadow-[0_10px_25px_rgba(227,6,19,0.3)] hover:-translate-y-1 transition-all duration-300">
-                <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-[#E52B28]/15 to-[#E52B28]/5 border border-[#E52B28]/20 flex items-center justify-center text-[#E52B28] shadow-sm mb-4">
+              <div className="flex flex-col items-center text-center bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-gray-900 hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:-translate-y-1 transition-all duration-300">
+                <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-[#111111]/15 to-[#111111]/5 border border-[#111111]/20 flex items-center justify-center text-[#111111] shadow-sm mb-4">
                   <Sparkles className="w-6 h-6" />
                 </div>
                 <h3 className="text-slate-900 font-bold text-lg mb-2">{t("sell_page.benefits.best_price.title")}</h3>
                 <p className="text-slate-600 text-sm font-normal">{t("sell_page.benefits.best_price.description")}</p>
               </div>
 
-              <div className="flex flex-col items-center text-center bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-red-500 hover:shadow-[0_10px_25px_rgba(227,6,19,0.3)] hover:-translate-y-1 transition-all duration-300">
-                <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-[#E52B28]/15 to-[#E52B28]/5 border border-[#E52B28]/20 flex items-center justify-center text-[#E52B28] shadow-sm mb-4">
+              <div className="flex flex-col items-center text-center bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-gray-900 hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:-translate-y-1 transition-all duration-300">
+                <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-[#111111]/15 to-[#111111]/5 border border-[#111111]/20 flex items-center justify-center text-[#111111] shadow-sm mb-4">
                   <Clock className="w-6 h-6" />
                 </div>
                 <h3 className="text-slate-900 font-bold text-lg mb-2">{t("sell_page.benefits.fast_process.title")}</h3>
                 <p className="text-slate-600 text-sm font-normal">{t("sell_page.benefits.fast_process.description")}</p>
               </div>
 
-              <div className="flex flex-col items-center text-center bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-red-500 hover:shadow-[0_10px_25px_rgba(227,6,19,0.3)] hover:-translate-y-1 transition-all duration-300">
-                <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-[#E52B28]/15 to-[#E52B28]/5 border border-[#E52B28]/20 flex items-center justify-center text-[#E52B28] shadow-sm mb-4">
+              <div className="flex flex-col items-center text-center bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-gray-900 hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:-translate-y-1 transition-all duration-300">
+                <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-[#111111]/15 to-[#111111]/5 border border-[#111111]/20 flex items-center justify-center text-[#111111] shadow-sm mb-4">
                   <Shield className="w-6 h-6" />
                 </div>
                 <h3 className="text-slate-900 font-bold text-lg mb-2">{t("sell_page.benefits.no_commitment.title")}</h3>
                 <p className="text-slate-600 text-sm font-normal">{t("sell_page.benefits.no_commitment.description")}</p>
               </div>
 
-              <div className="flex flex-col items-center text-center bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-red-500 hover:shadow-[0_10px_25px_rgba(227,6,19,0.3)] hover:-translate-y-1 transition-all duration-300">
-                <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-[#E52B28]/15 to-[#E52B28]/5 border border-[#E52B28]/20 flex items-center justify-center text-[#E52B28] shadow-sm mb-4">
+              <div className="flex flex-col items-center text-center bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-gray-900 hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:-translate-y-1 transition-all duration-300">
+                <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-[#111111]/15 to-[#111111]/5 border border-[#111111]/20 flex items-center justify-center text-[#111111] shadow-sm mb-4">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
                 <h3 className="text-slate-900 font-bold text-lg mb-2">{t("sell_page.benefits.any_vehicle.title")}</h3>
@@ -334,8 +344,8 @@ Kilometraje: ${formData.kilometraje} km`;
             </div>
 
             {/* Primary: appraisal wizard */}
-            <div className="relative z-10 max-w-2xl mx-auto mt-12 before:absolute before:-inset-2 before:bg-gradient-to-r before:from-[#E52B28]/20 before:via-red-500/12 before:to-[#E52B28]/20 before:blur-2xl before:rounded-3xl before:-z-10 after:absolute after:-inset-2 after:bg-[#E52B28]/10 after:blur-[45px] after:rounded-3xl after:-z-20">
-              <Card className="bg-white border border-slate-100 rounded-2xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.15),0_10px_30px_rgba(229,43,40,0.2)]">
+            <div className="relative z-10 max-w-2xl mx-auto mt-12 before:absolute before:-inset-2 before:bg-gradient-to-r before:from-[#111111]/20 before:via-black/12 before:to-[#111111]/20 before:blur-2xl before:rounded-3xl before:-z-10 after:absolute after:-inset-2 after:bg-[#111111]/10 after:blur-[45px] after:rounded-3xl after:-z-20">
+              <Card className="bg-white border border-slate-100 rounded-2xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.15),0_10px_30px_rgba(0,0,0,0.2)]">
                 {isSubmitted ? (
                   /* Success */
                   <div className="text-center py-8 animate-fade-in space-y-6">
@@ -687,7 +697,7 @@ Kilometraje: ${formData.kilometraje} km`;
                             <Label htmlFor="telefono" className="text-gray-600">{t("sell_page.form.phone")} {t("sell_page.form.required")}</Label>
                             <div className="flex">
                               <div className="flex items-center px-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-md">
-                                <span className="text-sm text-red-600 font-semibold">{getFlag()}</span>
+                                <span className="text-sm text-foreground font-semibold">{getFlag()}</span>
                               </div>
                               <Input
                                 id="telefono"
@@ -766,7 +776,7 @@ Kilometraje: ${formData.kilometraje} km`;
       {(() => {
         const P = PROCESS_CONTENT[language] || PROCESS_CONTENT.es;
         return (
-          <section className="relative overflow-hidden py-20 px-4 bg-gradient-to-b from-white to-[#FFF5F0]">
+          <section className="relative overflow-hidden py-20 px-4 bg-gradient-to-b from-white to-[#F8F9FA]">
             <div className="absolute -top-20 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
             <div className="container mx-auto max-w-6xl relative z-10">
               <div className="text-center mb-14">
@@ -799,9 +809,9 @@ Kilometraje: ${formData.kilometraje} km`;
                   return (
                     <div
                       key={i}
-                      className="bg-white rounded-2xl border border-gray-100 shadow-xl hover:shadow-[0_12px_30px_rgba(227,6,19,0.3)] hover:border-red-500 hover:-translate-y-1 transition-all duration-300 p-6 flex flex-col items-center text-center"
+                      className="bg-white rounded-2xl border border-gray-100 shadow-xl hover:shadow-[0_12px_30px_rgba(0,0,0,0.3)] hover:border-gray-900 hover:-translate-y-1 transition-all duration-300 p-6 flex flex-col items-center text-center"
                     >
-                      <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-[#E52B28]/15 to-[#E52B28]/5 border border-[#E52B28]/20 flex items-center justify-center text-[#E52B28] shadow-sm mb-4">
+                      <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-[#111111]/15 to-[#111111]/5 border border-[#111111]/20 flex items-center justify-center text-[#111111] shadow-sm mb-4">
                         <Icon className="w-6 h-6" />
                       </div>
                       <h4 className="font-bold text-foreground leading-snug">{label}</h4>

@@ -353,12 +353,12 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
 
       <main className="flex-1">
         {/* Hero Section with Form */}
-        <section className="relative pt-12 pb-20 px-4 overflow-hidden bg-gradient-to-br from-[#F8F9FA] via-white to-[#FFF5F0]">
+        <section className="relative pt-12 pb-20 px-4 overflow-hidden bg-gradient-to-br from-[#F8F9FA] via-white to-[#F8F9FA]">
           {/* Dot pattern */}
           <div className="absolute inset-0 opacity-[0.4]" style={{ backgroundImage: 'radial-gradient(circle, #e5e7eb 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
           {/* Soft ambient glow behind the form for depth */}
-          <div className="absolute bottom-0 right-0 w-[420px] h-[420px] bg-[#E52B28]/8 rounded-full blur-3xl translate-y-1/4 translate-x-1/4 pointer-events-none" />
+          <div className="absolute bottom-0 right-0 w-[420px] h-[420px] bg-[#111111]/8 rounded-full blur-3xl translate-y-1/4 translate-x-1/4 pointer-events-none" />
 
           <div className="container mx-auto max-w-7xl relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -380,14 +380,14 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                 </div>
 
                 {/* Benefits — compact rows in one container */}
-                <div className="rounded-2xl bg-white border border-red-200/70 shadow-[0_10px_30px_rgba(227,6,19,0.28)] divide-y divide-gray-100 overflow-hidden">
+                <div className="rounded-2xl bg-white border border-gray-200/70 shadow-[0_10px_30px_rgba(0,0,0,0.28)] divide-y divide-gray-100 overflow-hidden">
                   {[
                     { icon: Shield, key: 'reduced_payments' },
                     { icon: Clock, key: 'fast_approval' },
                     { icon: CheckCircle2, key: 'no_surprises' },
                   ].map(({ icon: Icon, key }) => (
-                    <div key={key} className="flex items-center gap-4 p-4 hover:bg-red-50/40 transition-colors">
-                      <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br from-[#E52B28]/15 to-[#E52B28]/5 border border-[#E52B28]/20 flex items-center justify-center text-[#E52B28]">
+                    <div key={key} className="flex items-center gap-4 p-4 hover:bg-gray-100/40 transition-colors">
+                      <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br from-[#111111]/15 to-[#111111]/5 border border-[#111111]/20 flex items-center justify-center text-[#111111]">
                         <Icon className="w-5 h-5" />
                       </div>
                       <div className="min-w-0">
@@ -400,8 +400,8 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
               </div>
 
               {/* Left column - Car visual */}
-              <div className="order-1 lg:col-span-5 hidden lg:block relative before:absolute before:-inset-3 before:bg-gradient-to-tr before:from-[#E52B28]/25 before:to-transparent before:blur-2xl before:rounded-3xl before:-z-10">
-                <div className="relative rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 border border-transparent hover:border-red-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_50px_-10px_rgba(227,6,19,0.4)] transition-all duration-300 ease-out cursor-pointer">
+              <div className="order-1 lg:col-span-5 hidden lg:block relative before:absolute before:-inset-3 before:bg-gradient-to-tr before:from-[#111111]/25 before:to-transparent before:blur-2xl before:rounded-3xl before:-z-10">
+                <div className="relative rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 border border-transparent hover:border-gray-900 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_50px_-10px_rgba(0,0,0,0.4)] transition-all duration-300 ease-out cursor-pointer">
                   <img
                     src={financingCars}
                     alt="OTO MOTOR"
@@ -412,7 +412,7 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                   {/* Floating badge - bottom right (clears the baked-in OTO watermark) */}
                   <div className="absolute bottom-4 right-4">
                     <span className="inline-flex items-center gap-2 rounded-full px-4 py-2 shadow-lg text-sm font-bold text-white backdrop-blur-md bg-black/40">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-foreground animate-pulse" />
                       {CAR_WAITS_BADGE[language] || CAR_WAITS_BADGE.es}
                     </span>
                   </div>
@@ -423,11 +423,11 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
           </div>
         </section>
         {/* Financing form */}
-        <section className="relative px-4 pb-20 bg-gradient-to-b from-[#FFF5F0] to-background">
+        <section className="relative px-4 pb-20 bg-gradient-to-b from-[#F8F9FA] to-background">
           <div className="relative group max-w-2xl mx-auto">
             {/* Even red halo like the "Call us" card */}
-            <div className="absolute -inset-1 bg-[#E52B28]/25 rounded-3xl blur-xl -z-10" />
-            <Card className="relative bg-white rounded-2xl border border-red-200/70 hover:border-red-500 shadow-[0_10px_30px_rgba(227,6,19,0.28)] hover:shadow-[0_16px_40px_rgba(227,6,19,0.42)] hover:-translate-y-1.5 transition-all duration-300 ease-out z-10">
+            <div className="absolute -inset-1 bg-[#111111]/25 rounded-3xl blur-xl -z-10" />
+            <Card className="relative bg-white rounded-2xl border border-gray-200/70 hover:border-gray-900 shadow-[0_10px_30px_rgba(0,0,0,0.28)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.42)] hover:-translate-y-1.5 transition-all duration-300 ease-out z-10">
                   <CardHeader className="space-y-4">
                     {currentStep === 1 && (
                       <div className="space-y-2">
@@ -570,7 +570,7 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                             const vehiclePrice = selectedVehicle.price;
 
                             return (
-                              <div className="p-3 bg-red-50 rounded-lg border border-red-200">
+                              <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
                                 <div className="flex justify-between items-center text-sm">
                                   <span className="text-muted-foreground">
                                     {selectedVehicle.brand} {selectedVehicle.model} · {formatPrice(vehiclePrice)}
@@ -689,7 +689,7 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                             const loanAmount = Math.max(0, vehiclePrice - downPayment);
 
                             return (
-                              <div className="p-3 bg-red-50 rounded-lg border border-red-200">
+                              <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
                                 <div className="flex justify-between items-center text-sm">
                                   <span className="text-muted-foreground">
                                     {selectedVehicle.brand} {selectedVehicle.model} · {formatPrice(vehiclePrice)}
@@ -850,7 +850,7 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                             const loanAmount = Math.max(0, vehiclePrice - downPayment);
 
                             return (
-                              <div className="p-3 bg-red-50 rounded-lg border border-red-200">
+                              <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
                                 <div className="flex justify-between items-center text-sm">
                                   <span className="text-muted-foreground">
                                     {selectedVehicle.brand} {selectedVehicle.model} · {formatPrice(vehiclePrice)}
@@ -976,7 +976,7 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                             const loanAmount = Math.max(0, vehiclePrice - downPayment);
 
                             return (
-                              <div className="p-3 bg-red-50 rounded-lg border border-red-200">
+                              <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
                                 <div className="flex justify-between items-center text-sm">
                                   <span className="text-muted-foreground">
                                     {selectedVehicle.brand} {selectedVehicle.model} · {formatPrice(vehiclePrice)}
@@ -1012,7 +1012,7 @@ Gastos hipoteca/alquiler mensual: ${formData.gastosHipotecaAlquiler ? formatPric
                               <Label htmlFor="telefono" className="text-gray-600">{t('financing_page.form.phone')} *</Label>
                               <div className="flex">
                                 <div className="flex items-center px-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-md">
-                                  <span className="text-sm text-red-600 font-semibold">{getFlag()}</span>
+                                  <span className="text-sm text-foreground font-semibold">{getFlag()}</span>
                                 </div>
                                 <Input
                                   id="telefono"

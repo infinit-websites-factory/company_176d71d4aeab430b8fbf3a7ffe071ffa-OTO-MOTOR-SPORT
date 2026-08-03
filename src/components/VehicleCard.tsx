@@ -95,7 +95,7 @@ const VehicleCard = ({
 
   return (
     <Link to={`/stock/${id}`} className="block h-full" onClick={handleClick}>
-      <Card className="group overflow-hidden bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-[0_10px_25px_rgba(227,6,19,0.3)] hover:border-red-500 hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full cursor-pointer">
+      <Card className="group overflow-hidden bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:border-gray-900 hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full cursor-pointer">
         <div className="relative overflow-hidden">
           {status === 'Reserved' && <ReservedBanner size="small" />}
           <img
@@ -121,7 +121,7 @@ const VehicleCard = ({
               <Button
                 size="icon"
                 variant="secondary"
-                className="h-8 w-8 bg-white/90 hover:bg-[#E30613] hover:text-white shadow-sm rounded-full transition-colors"
+                className="h-8 w-8 bg-white/90 hover:bg-[#111111] hover:text-white shadow-sm rounded-full transition-colors"
                 onClick={(e) => { e.preventDefault(); e.stopPropagation(); prevImage(); }}
               >
                 <ChevronLeft size={16} />
@@ -129,7 +129,7 @@ const VehicleCard = ({
               <Button
                 size="icon"
                 variant="secondary"
-                className="h-8 w-8 bg-white/90 hover:bg-[#E30613] hover:text-white shadow-sm rounded-full transition-colors"
+                className="h-8 w-8 bg-white/90 hover:bg-[#111111] hover:text-white shadow-sm rounded-full transition-colors"
                 onClick={(e) => { e.preventDefault(); e.stopPropagation(); nextImage(); }}
               >
                 <ChevronRight size={16} />
@@ -137,7 +137,7 @@ const VehicleCard = ({
             </div>
           )}
           {images.length > 1 && (
-            <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-foreground text-xs font-medium px-2 py-1 rounded-full shadow-sm transition-colors group-hover:bg-[#E30613] group-hover:text-white">
+            <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-foreground text-xs font-medium px-2 py-1 rounded-full shadow-sm transition-colors group-hover:bg-[#111111] group-hover:text-white">
               {currentImageIndex + 1}/{images.length}
             </div>
           )}

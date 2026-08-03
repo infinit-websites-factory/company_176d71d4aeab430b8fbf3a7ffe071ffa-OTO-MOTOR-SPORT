@@ -71,8 +71,8 @@ const WhoWeAre = () => {
     <section className="py-20 bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-7xl mx-auto px-4">
         {/* Left: collage image with multi-layered ambient glow */}
-        <div className="lg:col-span-6 relative before:absolute before:-inset-2 before:bg-[#E52B28]/30 before:blur-2xl before:rounded-3xl before:-z-10 after:absolute after:-inset-5 after:bg-[#E52B28]/15 after:blur-[60px] after:rounded-3xl after:-z-20">
-          <div className="relative rounded-2xl overflow-hidden border border-red-200/70 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.25),0_10px_30px_rgba(227,6,19,0.3)] hover:border-red-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_50px_-10px_rgba(227,6,19,0.4)] transition-all duration-300 ease-out cursor-pointer">
+        <div className="lg:col-span-6 relative before:absolute before:-inset-2 before:bg-[#111111]/30 before:blur-2xl before:rounded-3xl before:-z-10 after:absolute after:-inset-5 after:bg-[#111111]/15 after:blur-[60px] after:rounded-3xl after:-z-20">
+          <div className="relative rounded-2xl overflow-hidden border border-gray-200/70 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.25),0_10px_30px_rgba(0,0,0,0.3)] hover:border-gray-900 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_50px_-10px_rgba(0,0,0,0.4)] transition-all duration-300 ease-out cursor-pointer">
             <img
               src={collageImage}
               alt="OTO MOTOR"
@@ -83,7 +83,7 @@ const WhoWeAre = () => {
 
         {/* Right: content */}
         <div className="lg:col-span-6 space-y-6">
-          <span className="bg-[#E52B28]/10 text-[#E52B28] border border-[#E52B28]/20 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide uppercase inline-flex items-center gap-1.5">
+          <span className="bg-[#111111]/10 text-[#111111] border border-[#111111]/20 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide uppercase inline-flex items-center gap-1.5">
             {c.badge}
           </span>
 
@@ -109,7 +109,7 @@ const WhoWeAre = () => {
             {stats.map((stat, i) => (
               <div
                 key={i}
-                className="bg-white border border-slate-100 hover:border-[#E52B28]/30 rounded-xl p-4 shadow-[0_8px_25px_-8px_rgba(229,43,40,0.25)] hover:shadow-[0_14px_32px_-8px_rgba(229,43,40,0.45)] transition-all duration-300 hover:-translate-y-1"
+                className="bg-white border border-slate-100 hover:border-[#111111]/30 rounded-xl p-4 shadow-[0_8px_25px_-8px_rgba(0,0,0,0.25)] hover:shadow-[0_14px_32px_-8px_rgba(0,0,0,0.45)] transition-all duration-300 hover:-translate-y-1"
               >
                 {loading ? (
                   <div className="animate-pulse space-y-2">
@@ -118,7 +118,7 @@ const WhoWeAre = () => {
                   </div>
                 ) : (
                   <>
-                    <div className="text-3xl font-extrabold text-[#E52B28]">{stat.value}</div>
+                    <div className="text-3xl font-extrabold text-[#111111]">{stat.value}</div>
                     <div className="text-xs font-medium text-slate-500 uppercase tracking-wider mt-1">{stat.label}</div>
                   </>
                 )}
@@ -128,7 +128,7 @@ const WhoWeAre = () => {
 
           <a
             href="/services"
-            className="inline-flex items-center gap-2 bg-[#E52B28] hover:bg-[#c4211f] text-white font-medium px-6 py-3 rounded-xl shadow-lg shadow-[#E52B28]/25 hover:shadow-xl hover:shadow-[#E52B28]/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+            className="inline-flex items-center gap-2 bg-[#111111] hover:bg-[#333333] text-white font-medium px-6 py-3 rounded-xl shadow-lg shadow-[#111111]/25 hover:shadow-xl hover:shadow-[#111111]/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
           >
             {c.cta}
             <ArrowRight className="w-4 h-4" />

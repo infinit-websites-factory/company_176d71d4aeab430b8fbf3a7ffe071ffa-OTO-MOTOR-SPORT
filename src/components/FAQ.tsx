@@ -40,11 +40,11 @@ const FAQ = () => {
   const visibleFaqs = showAll ? faqs : faqs.slice(0, VISIBLE_COUNT);
 
   return (
-    <section className="py-20 px-4 bg-[#FFF5F0]">
+    <section className="py-20 px-4 bg-[#F8F9FA]">
       <div className="container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,360px)_1fr] gap-8 lg:gap-12 items-start">
           {/* Left: promo card */}
-          <div className="lg:sticky lg:top-24 relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-red-600 p-8 text-white shadow-xl shadow-primary/30">
+          <div className="lg:sticky lg:top-24 relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary to-gray-800 p-8 text-white shadow-xl shadow-primary/30">
             {/* Decorative question mark */}
             <span className="absolute -bottom-8 -right-2 text-[11rem] font-black leading-none text-white/10 select-none pointer-events-none">?</span>
 

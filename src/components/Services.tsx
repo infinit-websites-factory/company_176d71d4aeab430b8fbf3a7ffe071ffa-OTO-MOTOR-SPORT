@@ -33,8 +33,24 @@ const Services = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-[#FFF5F0]">
-      <div className="container mx-auto max-w-7xl">
+    <section className="relative overflow-hidden py-20 px-4 bg-gradient-to-b from-white via-[#F6F8FA] to-white">
+      {/* Blueprint grid texture, faded toward the centre */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(hsl(var(--foreground) / 0.045) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground) / 0.045) 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
+          maskImage: "radial-gradient(ellipse 78% 68% at 50% 42%, #000 42%, transparent 100%)",
+          WebkitMaskImage: "radial-gradient(ellipse 78% 68% at 50% 42%, #000 42%, transparent 100%)",
+        }}
+      />
+      {/* Decorative outline rings + soft glow */}
+      <div className="absolute -top-28 -left-24 w-96 h-96 rounded-full border border-foreground/[0.06] pointer-events-none" />
+      <div className="absolute -bottom-36 -right-24 w-[30rem] h-[30rem] rounded-full border border-foreground/[0.05] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[42rem] h-64 bg-foreground/[0.03] blur-3xl rounded-full pointer-events-none" />
+
+      <div className="container mx-auto max-w-7xl relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -52,7 +68,7 @@ const Services = () => {
             return (
               <div
                 key={index}
-                className="group bg-white rounded-xl p-7 border border-gray-100 shadow-lg hover:shadow-[0_10px_25px_rgba(227,6,19,0.3)] hover:border-red-500 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+                className="group bg-white rounded-xl p-7 border border-gray-100 shadow-lg hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:border-gray-900 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
               >
                 {/* Top accent bar */}
                 <div className={`absolute top-0 left-0 right-0 h-1 ${service.accent} opacity-80 group-hover:opacity-100 transition-opacity`} />

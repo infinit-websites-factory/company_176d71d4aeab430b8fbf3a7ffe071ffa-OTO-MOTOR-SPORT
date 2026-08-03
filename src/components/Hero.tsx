@@ -58,7 +58,7 @@ const Hero = () => {
             </div>
             <button
               type="submit"
-              className="bg-[#E30613] hover:bg-red-600 text-white font-medium px-6 py-3 rounded-xl transition-colors shrink-0"
+              className="bg-[#111111] hover:bg-[#333333] text-white font-medium px-6 py-3 rounded-xl transition-colors shrink-0"
             >
               {t("common.search")}
             </button>
@@ -73,7 +73,7 @@ const Hero = () => {
                   key={i}
                   className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-xl px-3 py-2 text-sm font-medium"
                 >
-                  <Icon className="w-4 h-4 text-red-400" />
+                  <Icon className="w-4 h-4 text-gray-300" />
                   {f.label}
                 </span>
               );

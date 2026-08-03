@@ -181,7 +181,7 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
             {/* Left: office visual */}
             <div className="relative">
-              <div className="rounded-3xl overflow-hidden border border-gray-200 shadow-md h-full min-h-[380px] hover:border-red-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_50px_-10px_rgba(227,6,19,0.4)] transition-all duration-300 ease-out cursor-pointer">
+              <div className="rounded-3xl overflow-hidden border border-gray-200 shadow-md h-full min-h-[380px] hover:border-gray-900 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_24px_50px_-10px_rgba(0,0,0,0.4)] transition-all duration-300 ease-out cursor-pointer">
                 <img
                   src={officeImage}
                   alt={`${t('contact_page.location.title')} - OTO MOTOR`}
@@ -190,7 +190,7 @@ const Contact = () => {
               </div>
               {/* Floating badge */}
               <div className="absolute top-5 left-5 bg-white/95 backdrop-blur-sm rounded-full pl-3 pr-4 py-2 shadow-lg flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
+                <span className="w-2.5 h-2.5 rounded-full bg-foreground animate-pulse" />
                 <span className="text-sm font-bold text-foreground">
                   {OFFICE_BADGE[language] || OFFICE_BADGE.es}
                 </span>
@@ -207,10 +207,10 @@ const Contact = () => {
                     href={info.href}
                     target={info.icon === MapPin ? "_blank" : undefined}
                     rel={info.icon === MapPin ? "noopener noreferrer" : undefined}
-                    className="group flex items-start gap-4 bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-red-500 hover:shadow-[0_10px_25px_rgba(227,6,19,0.3)] hover:-translate-y-1 transition-all duration-300"
+                    className="group flex items-start gap-4 bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-gray-900 hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:-translate-y-1 transition-all duration-300"
                   >
                     {/* Solid orange icon badge */}
-                    <div className="w-12 h-12 shrink-0 rounded-xl bg-red-500 flex items-center justify-center shadow-md shadow-red-500/30">
+                    <div className="w-12 h-12 shrink-0 rounded-xl bg-foreground flex items-center justify-center shadow-md shadow-black/20">
                       <IconComponent className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -229,7 +229,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Form Section */}
-      <section className="relative overflow-hidden py-12 px-4 bg-gradient-to-b from-[#FFF5F0] to-background">
+      <section className="relative overflow-hidden py-12 px-4 bg-gradient-to-b from-[#F8F9FA] to-background">
         {/* Decorative orange graphics */}
         <div className="absolute -top-16 -left-20 w-80 h-80 bg-primary/15 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute top-1/3 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
@@ -240,8 +240,8 @@ const Contact = () => {
         <div className="container mx-auto max-w-2xl relative z-10">
           <div className="relative group">
             {/* Ambient red backlight glow */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#E52B28]/20 via-red-500/15 to-[#E52B28]/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-500 -z-10" />
-          <Card className="relative bg-white rounded-2xl border border-slate-200/80 hover:border-[#E52B28] shadow-[0_10px_30px_-5px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_-5px_rgba(229,43,40,0.15)] hover:-translate-y-1.5 transition-all duration-300 ease-out z-10">
+            <div className="absolute -inset-1 bg-gradient-to-r from-[#111111]/20 via-black/15 to-[#111111]/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition duration-500 -z-10" />
+          <Card className="relative bg-white rounded-2xl border border-slate-200/80 hover:border-[#111111] shadow-[0_10px_30px_-5px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_-5px_rgba(0,0,0,0.15)] hover:-translate-y-1.5 transition-all duration-300 ease-out z-10">
             <CardContent className="p-8">
               {isSubmitted ? (
                 <div className="text-center py-12">
@@ -285,7 +285,7 @@ const Contact = () => {
                         value={formData.nombre}
                         onChange={handleInputChange}
                         required
-                        className="bg-white border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#E52B28]/20 focus:border-[#E52B28] transition-all"
+                        className="bg-white border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#111111]/20 focus:border-[#111111] transition-all"
                         placeholder={t('contact_page.form.name_placeholder')}
                       />
                     </div>
@@ -297,7 +297,7 @@ const Contact = () => {
                         value={formData.apellido}
                         onChange={handleInputChange}
                         required
-                        className="bg-white border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#E52B28]/20 focus:border-[#E52B28] transition-all"
+                        className="bg-white border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#111111]/20 focus:border-[#111111] transition-all"
                         placeholder={t('contact_page.form.surname_placeholder')}
                       />
                     </div>
@@ -313,7 +313,7 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="bg-white border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#E52B28]/20 focus:border-[#E52B28] transition-all"
+                        className="bg-white border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#111111]/20 focus:border-[#111111] transition-all"
                         placeholder={t('contact_page.form.email_placeholder')}
                       />
                     </div>
@@ -321,7 +321,7 @@ const Contact = () => {
                       <Label htmlFor="telefono" className="text-gray-600">{t('contact_page.form.phone')}</Label>
                       <div className="flex">
                         <div className="flex items-center px-3 bg-gray-50 border border-r-0 border-gray-200 rounded-l-md">
-                          <span className="text-sm text-red-600 font-semibold">{getFlag()}</span>
+                          <span className="text-sm text-foreground font-semibold">{getFlag()}</span>
                         </div>
                         <Input
                           id="telefono"
@@ -330,7 +330,7 @@ const Contact = () => {
                           value={formData.telefono}
                           onChange={handleInputChange}
                           required
-                          className="bg-white border-gray-200 rounded-l-none focus:outline-none focus:ring-2 focus:ring-[#E52B28]/20 focus:border-[#E52B28] transition-all"
+                          className="bg-white border-gray-200 rounded-l-none focus:outline-none focus:ring-2 focus:ring-[#111111]/20 focus:border-[#111111] transition-all"
                           placeholder={t('contact_page.form.phone_placeholder')}
                         />
                       </div>
@@ -347,7 +347,7 @@ const Contact = () => {
                       required
                       rows={5}
                       placeholder={t('contact_page.form.message_placeholder')}
-                      className="bg-white border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#E52B28]/20 focus:border-[#E52B28] transition-all"
+                      className="bg-white border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#111111]/20 focus:border-[#111111] transition-all"
                     />
                   </div>
 
@@ -376,7 +376,7 @@ const Contact = () => {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 bg-[#E52B28] hover:bg-red-700 text-white font-semibold rounded-xl shadow-lg shadow-red-500/25 hover:shadow-red-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
+                    className="w-full py-3.5 bg-[#111111] hover:bg-black text-white font-semibold rounded-xl shadow-lg shadow-black/20 hover:shadow-black/20 hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
                   >
                     {isSubmitting ? t('contact_page.form.submitting') : t('contact_page.form.submit')}
                   </Button>
@@ -389,7 +389,7 @@ const Contact = () => {
       </section>
 
       {/* Location Section */}
-      <section className="relative overflow-hidden py-16 px-4 bg-gradient-to-br from-gray-50 via-white to-[#FFF5F0]">
+      <section className="relative overflow-hidden py-16 px-4 bg-gradient-to-br from-gray-50 via-white to-[#F8F9FA]">
         {/* Decorative orange graphics */}
         <div className="absolute -top-20 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 -left-20 w-80 h-80 bg-primary/8 rounded-full blur-3xl pointer-events-none" />
@@ -402,9 +402,9 @@ const Contact = () => {
             {/* Left: details column */}
             <div className="flex flex-col gap-6">
               {/* Address card */}
-              <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:border-red-500 hover:shadow-[0_10px_25px_rgba(227,6,19,0.3)] hover:-translate-y-1 transition-all duration-300">
+              <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:border-gray-900 hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:-translate-y-1 transition-all duration-300">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 shrink-0 rounded-xl bg-red-500 flex items-center justify-center shadow-md shadow-red-500/30">
+                  <div className="w-12 h-12 shrink-0 rounded-xl bg-foreground flex items-center justify-center shadow-md shadow-black/20">
                     <MapPin className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
@@ -429,10 +429,10 @@ const Contact = () => {
               </div>
 
               {/* Business hours card */}
-              <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:border-red-500 hover:shadow-[0_10px_25px_rgba(227,6,19,0.3)] hover:-translate-y-1 transition-all duration-300">
+              <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:border-gray-900 hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:-translate-y-1 transition-all duration-300">
                 <div className="flex items-center justify-between gap-4 mb-4">
                   <div className="flex items-center gap-4 min-w-0">
-                    <div className="w-12 h-12 shrink-0 rounded-xl bg-red-500 flex items-center justify-center shadow-md shadow-red-500/30">
+                    <div className="w-12 h-12 shrink-0 rounded-xl bg-foreground flex items-center justify-center shadow-md shadow-black/20">
                       <Clock className="w-6 h-6 text-white" />
                     </div>
                     <h3 className="text-lg font-bold text-foreground truncate">
@@ -461,7 +461,7 @@ const Contact = () => {
             </div>
 
             {/* Right: map block */}
-            <div className="relative rounded-3xl overflow-hidden shadow-lg border border-slate-200/80 min-h-[420px] hover:border-red-500/40 transition-all duration-300">
+            <div className="relative rounded-3xl overflow-hidden shadow-lg border border-slate-200/80 min-h-[420px] hover:border-gray-900/40 transition-all duration-300">
               <iframe
                 src={address.mapsEmbedUrl}
                 className="absolute inset-0 w-full h-full"

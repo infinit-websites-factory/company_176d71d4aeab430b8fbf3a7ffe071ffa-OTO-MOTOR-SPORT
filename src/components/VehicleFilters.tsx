@@ -69,7 +69,7 @@ const VehicleFilters = ({
 
   // Orange focus/hover/open glow for dropdowns; extra highlight when a value is active
   const triggerBase =
-    "bg-white border-gray-200 shadow-md transition-all duration-300 hover:border-red-500 hover:shadow-[0_10px_25px_rgba(227,6,19,0.3)] focus:border-primary focus:ring-2 focus:ring-primary/30 data-[state=open]:border-primary data-[state=open]:ring-2 data-[state=open]:ring-primary/25";
+    "bg-white border-gray-200 shadow-md transition-all duration-300 hover:border-gray-900 hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] focus:border-primary focus:ring-2 focus:ring-primary/30 data-[state=open]:border-primary data-[state=open]:ring-2 data-[state=open]:ring-primary/25";
   const triggerActive = "border-primary text-primary bg-primary/5 font-medium";
   const triggerCls = (active: boolean) => `${triggerBase} ${active ? triggerActive : ""}`;
 
@@ -102,7 +102,7 @@ const VehicleFilters = ({
             <Search className={`absolute left-3 top-1/2 -translate-y-1/2 transition-colors ${searchTerm ? "text-primary" : "text-muted-foreground"}`} size={16} />
             <Input
               placeholder={t('search.placeholder')}
-              className={`pl-10 bg-white border-gray-200 shadow-md transition-all duration-300 hover:border-red-500 hover:shadow-[0_10px_25px_rgba(227,6,19,0.3)] focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/30 ${searchTerm ? "border-primary bg-primary/5" : ""}`}
+              className={`pl-10 bg-white border-gray-200 shadow-md transition-all duration-300 hover:border-gray-900 hover:shadow-[0_10px_25px_rgba(0,0,0,0.3)] focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/30 ${searchTerm ? "border-primary bg-primary/5" : ""}`}
               value={searchTerm}
               onChange={(e) => onSearchChange(e.target.value)}
             />
