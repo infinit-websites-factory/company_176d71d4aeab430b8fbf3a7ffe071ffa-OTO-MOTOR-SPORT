@@ -112,7 +112,7 @@
       },
       "schedule": {
         "question": "Quels sont vos horaires d'ouverture ?",
-        "answer": "Nos horaires sont : lundi et mardi de 9h00 à 14h00 et de 16h00 à 19h00, mercredi de 9h00 à 19h00, jeudi et vendredi de 10h00 à 20h00. Nous sommes fermés le samedi et le dimanche. Vous pouvez également nous contacter par WhatsApp ou email en dehors de ces horaires."
+        "answer": "Nos horaires sont : du lundi au vendredi de 10h00 à 14h00 et de 16h00 à 20h00. Le samedi uniquement sur rendez-vous et nous sommes fermés le dimanche. Vous pouvez également nous contacter par WhatsApp ou email en dehors de ces horaires."
       },
       "test_drive": {
         "question": "Puis-je organiser un essai routier ?",
@@ -133,7 +133,7 @@
     },
     "hours_title": "Horaires",
     "hours": {
-      "weekday": "Lun-Ven : 10h00-14h00, 16h00-19h00",
+      "weekday": "Lun-Ven : 10h00-14h00, 16h00-20h00",
       "saturday": "Sam : Sur rendez-vous",
       "sunday": "Dim : Fermé"
     },
@@ -192,7 +192,7 @@
       "address_title": "Adresse",
       "hours_title": "Heures d'ouverture",
       "hours": {
-        "weekday": "Lundi au vendredi : 10h00 - 14h00, 16h00 - 19h00",
+        "weekday": "Lundi au vendredi : 10h00 - 14h00, 16h00 - 20h00",
         "saturday": "Samedi : Sur rendez-vous",
         "sunday": "Dimanche : Fermé"
       }

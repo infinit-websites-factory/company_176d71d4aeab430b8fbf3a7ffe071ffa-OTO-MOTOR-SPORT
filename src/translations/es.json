@@ -112,7 +112,7 @@
       },
       "schedule": {
         "question": "¿Cuáles son vuestros horarios de atención?",
-        "answer": "Nuestro horario es: lunes y martes de 9:00 a 14:00 y de 16:00 a 19:00, miércoles de 9:00 a 19:00, y jueves y viernes de 10:00 a 20:00. Los sábados y domingos permanecemos cerrados. Puedes visitarnos dentro de este horario para ver nuestros vehículos sin necesidad de cita previa. Si prefieres una atención más personalizada, te recomendamos solicitar cita previa. También puedes contactarnos por WhatsApp o email fuera del horario comercial y te responderemos lo antes posible."
+        "answer": "Nuestro horario es: de lunes a viernes de 10:00 a 14:00 y de 16:00 a 20:00. Los sábados atendemos con cita previa y los domingos permanecemos cerrados. Puedes visitarnos dentro de este horario para ver nuestros vehículos sin necesidad de cita previa. Si prefieres una atención más personalizada, te recomendamos solicitar cita previa. También puedes contactarnos por WhatsApp o email fuera del horario comercial y te responderemos lo antes posible."
       },
       "test_drive": {
         "question": "¿Puedo concertar una prueba de conducción?",
@@ -133,8 +133,8 @@
     },
     "hours_title": "Horarios",
     "hours": {
-      "weekday": "Lun-Sab: 10:00-14:00, 16:00-20:00",
-      "saturday": "",
+      "weekday": "Lun-Vie: 10:00-14:00, 16:00-20:00",
+      "saturday": "Sáb: Con cita previa",
       "sunday": "Dom: Cerrado"
     },
     "legal": {
@@ -192,8 +192,8 @@
       "address_title": "Dirección",
       "hours_title": "Horarios de atención",
       "hours": {
-        "weekday": "Lunes a Sábado: 10:00 - 14:00, 16:00 - 20:00",
-        "saturday": "",
+        "weekday": "Lunes a Viernes: 10:00 - 14:00, 16:00 - 20:00",
+        "saturday": "Sábado: Con cita previa",
         "sunday": "Domingo: Cerrado"
       }
     }

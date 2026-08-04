@@ -66,29 +66,26 @@ const ADDRESSES: Record<Language, AddressInfo> = {
 
 const OPENING_HOURS: Record<Language, { label: string; value: string; closed?: boolean }[]> = {
   es: [
-    { label: "Lun – Mar", value: "9:00–14:00, 16:00–19:00" },
-    { label: "Miércoles", value: "9:00–19:00" },
-    { label: "Jue – Vie", value: "10:00–20:00" },
-    { label: "Sáb – Dom", value: "Cerrado", closed: true },
+    { label: "Lun – Vie", value: "10:00–14:00, 16:00–20:00" },
+    { label: "Sábado", value: "Con cita previa" },
+    { label: "Domingo", value: "Cerrado", closed: true },
   ],
   en: [
-    { label: "Mon – Tue", value: "9:00–14:00, 16:00–19:00" },
-    { label: "Wednesday", value: "9:00–19:00" },
-    { label: "Thu – Fri", value: "10:00–20:00" },
-    { label: "Sat – Sun", value: "Closed", closed: true },
+    { label: "Mon – Fri", value: "10:00–14:00, 16:00–20:00" },
+    { label: "Saturday", value: "By appointment" },
+    { label: "Sunday", value: "Closed", closed: true },
   ],
   fr: [
-    { label: "Lun – Mar", value: "9h00–14h00, 16h00–19h00" },
-    { label: "Mercredi", value: "9h00–19h00" },
-    { label: "Jeu – Ven", value: "10h00–20h00" },
-    { label: "Sam – Dim", value: "Fermé", closed: true },
+    { label: "Lun – Ven", value: "10h00–14h00, 16h00–20h00" },
+    { label: "Samedi", value: "Sur rendez-vous" },
+    { label: "Dimanche", value: "Fermé", closed: true },
   ],
 };
 
 const HOURS_SUMMARY: Record<Language, string> = {
-  es: "Lun–Vie · Sáb y Dom cerrado",
-  en: "Mon–Fri · Sat & Sun closed",
-  fr: "Lun–Ven · Sam & Dim fermé",
+  es: "Lun–Vie · Sáb con cita previa",
+  en: "Mon–Fri · Sat by appointment",
+  fr: "Lun–Ven · Sam sur rendez-vous",
 };
 
 const CURRENCIES: Record<Language, { code: string; symbol: string }> = {

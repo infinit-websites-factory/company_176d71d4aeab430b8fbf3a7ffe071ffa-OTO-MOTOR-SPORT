@@ -112,7 +112,7 @@
       },
       "schedule": {
         "question": "What are your opening hours?",
-        "answer": "Our opening hours are: Monday and Tuesday from 9:00 to 14:00 and 16:00 to 19:00, Wednesday from 9:00 to 19:00, and Thursday and Friday from 10:00 to 20:00. We are closed on Saturdays and Sundays. You can also reach us via WhatsApp or email outside these hours."
+        "answer": "Our opening hours are: Monday to Friday from 10:00 to 14:00 and 16:00 to 20:00. Saturdays are by appointment only and we are closed on Sundays. You can also reach us via WhatsApp or email outside these hours."
       },
       "test_drive": {
         "question": "Can I arrange a test drive?",
@@ -133,8 +133,8 @@
     },
     "hours_title": "Hours",
     "hours": {
-      "weekday": "Mon-Sat: 10:00-14:00, 16:00-20:00",
-      "saturday": "",
+      "weekday": "Mon-Fri: 10:00-14:00, 16:00-20:00",
+      "saturday": "Sat: By appointment",
       "sunday": "Sun: Closed"
     },
     "legal": {
@@ -192,8 +192,8 @@
       "address_title": "Address",
       "hours_title": "Opening hours",
       "hours": {
-        "weekday": "Monday to Saturday: 10:00 - 14:00, 16:00 - 20:00",
-        "saturday": "",
+        "weekday": "Monday to Friday: 10:00 - 14:00, 16:00 - 20:00",
+        "saturday": "Saturday: By appointment",
         "sunday": "Sunday: Closed"
       }
     }
