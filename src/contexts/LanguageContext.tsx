@@ -37,8 +37,9 @@ const PHONE_NUMBERS = {
 
 const EMAIL = "otomotor2013@gmail.com";
 
-const MAPS_URL = "https://www.google.com/maps/place/OTO+Motor+Sport+SL/@40.4010822,-3.9984665,19.5z/data=!4m6!3m5!1s0xd41972fe334e1cd:0x8ed9162adbdbd02e!8m2!3d40.4011529!4d-3.9982816!16s%2Fg%2F11stm4ppb3";
-const MAPS_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d537.1095864083261!2d-3.9984664581218397!3d40.40108224877727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd41972fe334e1cd%3A0x8ed9162adbdbd02e!2sOTO%20Motor%20Sport%20SL!5e0!3m2!1sen!2sin!4v1784570989990!5m2!1sen!2sin";
+const MAPS_QUERY = "C/ Islas Cíes, 4, 28970 Humanes de Madrid";
+const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAPS_QUERY)}`;
+const MAPS_EMBED_URL = `https://maps.google.com/maps?q=${encodeURIComponent(MAPS_QUERY)}&output=embed`;
 
 const ADDRESSES: Record<Language, AddressInfo> = {
   es: {
@@ -138,7 +139,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const getCityName = () => {
-    return "Brunete";
+    return "Humanes de Madrid";
   };
 
   const getCurrency = () => {

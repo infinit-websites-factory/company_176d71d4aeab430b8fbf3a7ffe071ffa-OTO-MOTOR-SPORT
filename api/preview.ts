@@ -120,7 +120,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     // Build description parts
     const descParts = [vehicle.brand, vehicle.model, vehicle.year].filter(Boolean);
-    const pageDescription = `${descParts.join(' ')} - ${mileageText}, ${vehicle.fuel}, ${vehicle.transmission}. Vehículo de alta gama disponible en OTO MOTOR Brunete, Madrid.`;
+    const pageDescription = `${descParts.join(' ')} - ${mileageText}, ${vehicle.fuel}, ${vehicle.transmission}. Vehículo de alta gama disponible en OTO MOTOR Humanes de Madrid.`;
 
     const pageUrl = `https://otomotor.infinit.cc/buy/${id}`;
     let carImage = vehicle.images && vehicle.images.length > 0 ? vehicle.images[0] : 'https://otomotor.infinit.cc/placeholder.svg';
