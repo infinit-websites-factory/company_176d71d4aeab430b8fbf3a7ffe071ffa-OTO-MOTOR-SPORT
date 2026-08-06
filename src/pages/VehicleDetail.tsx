@@ -470,6 +470,16 @@ const VehicleDetail = () => {
                   {formatPrice(vehicle.price)}
                 </div>
               </div>
+              {vehicle.financedPrice != null && (
+                <div className="mb-4">
+                  <div className="text-sm text-muted-foreground mb-2">{t('vehicle_detail.pricing.financed')}</div>
+                  <div className="bg-gray-100 border border-gray-200 px-3 py-1 rounded-lg inline-block">
+                    <div className="text-2xl font-bold text-foreground">
+                      {formatPrice(vehicle.financedPrice)}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Reserve Button */}

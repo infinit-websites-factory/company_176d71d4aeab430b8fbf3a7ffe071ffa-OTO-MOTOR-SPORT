@@ -751,7 +751,9 @@
       "schedule_appointment": "Prendre rendez-vous"
     },
     "pricing": {
-      "label": "Prix"
+      "label": "Prix",
+      "financed": "Prix financé",
+      "financed_short": "Financé"
     },
     "reserve": {
       "title": "Réserver le véhicule",

@@ -752,7 +752,9 @@
       "schedule_appointment": "Agendar cita"
     },
     "pricing": {
-      "label": "Precio"
+      "label": "Precio",
+      "financed": "Precio financiado",
+      "financed_short": "Financiado"
     },
     "reserve": {
       "title": "Reservar vehículo",

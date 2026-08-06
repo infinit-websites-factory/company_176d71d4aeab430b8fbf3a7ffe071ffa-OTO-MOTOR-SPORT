@@ -7,6 +7,9 @@ export interface CarApiResponse {
   status: string;
   make: string;
   model: string;
+  previous_price_cents?: number | null;
+  financed_price_cents?: number | null;
+  monthly_installments_cents?: number | null;
   registration_date: string;
   odometer: {
     value: number;
@@ -48,6 +51,7 @@ export interface Vehicle {
   model: string;
   year: number;
   price: number;
+  financedPrice?: number;
   mileage: number;
   mileageUnit: string;
   fuel: string;
@@ -108,7 +112,7 @@ export const CONTACT_FORM_API_URL = `${API_BASE_URL}/api/interactions/contact-fo
 export const GOOGLE_REVIEWS_API_URL = `${API_BASE_URL}/api/public/dealers/by-profile/${PROFILE_ID}/google-reviews`;
 
 // Google Place ID for this dealer (source of the reviews above)
-export const GOOGLE_PLACE_ID = 'ChIJzeE04y-XQQ0RLtDb2yoW2Y4';
+export const GOOGLE_PLACE_ID = 'ChIJlYyVEHiNQQ0R4fcdCdaq-ik';
 
 export interface GoogleReview {
   author: string;
@@ -257,6 +261,7 @@ export const transformApiCarToVehicle = (apiCar: CarApiResponse): Vehicle => {
     model: apiCar.model || 'Unknown',
     year: registrationYear,
     price: apiCar.price_cents ? apiCar.price_cents / 100 : 0,
+    financedPrice: apiCar.financed_price_cents ? apiCar.financed_price_cents / 100 : undefined,
     mileage: apiCar.odometer?.value || 0,
     mileageUnit: apiCar.odometer?.unit || 'km',
     fuel: apiCar.fuel || 'Unknown',

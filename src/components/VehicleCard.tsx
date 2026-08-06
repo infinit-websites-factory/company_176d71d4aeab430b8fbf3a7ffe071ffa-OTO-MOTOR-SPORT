@@ -18,6 +18,7 @@ interface VehicleCardProps {
   model: string;
   year: number;
   price: number;
+  financedPrice?: number;
   mileage: number;
   mileageUnit: string;
   fuel: string;
@@ -34,6 +35,7 @@ const VehicleCard = ({
   model,
   year,
   price,
+  financedPrice,
   mileage,
   mileageUnit,
   fuel,
@@ -142,9 +144,17 @@ const VehicleCard = ({
             </div>
           )}
 
-          {/* Price badge */}
-          <div className="absolute bottom-3 left-3 bg-primary text-primary-foreground font-bold text-lg px-3.5 py-1.5 rounded-lg shadow-lg">
-            {formatPrice(price)}
+          {/* Price badge (+ financed price when set in the backoffice) */}
+          <div className="absolute bottom-3 left-3 flex flex-col items-start gap-1.5">
+            <div className="bg-primary text-primary-foreground font-bold text-lg px-3.5 py-1.5 rounded-lg shadow-lg">
+              {formatPrice(price)}
+            </div>
+            {financedPrice != null && (
+              <div className="bg-white/95 backdrop-blur-sm text-gray-900 text-xs font-semibold px-2.5 py-1 rounded-md shadow-md">
+                {formatPrice(financedPrice)}
+                <span className="ml-1 font-medium text-gray-500">{t('vehicle_detail.pricing.financed_short')}</span>
+              </div>
+            )}
           </div>
         </div>
 

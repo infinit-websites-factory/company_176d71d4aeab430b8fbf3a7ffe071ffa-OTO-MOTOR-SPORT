@@ -751,7 +751,9 @@
       "schedule_appointment": "Schedule appointment"
     },
     "pricing": {
-      "label": "Price"
+      "label": "Price",
+      "financed": "Financed price",
+      "financed_short": "Financed"
     },
     "reserve": {
       "title": "Reserve vehicle",
