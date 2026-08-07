@@ -755,6 +755,19 @@
       "financed": "Prix financé",
       "financed_short": "Financé"
     },
+    "calculator": {
+      "title": "Simulateur de financement",
+      "subtitle": "Estimez votre mensualité",
+      "monthly_payment": "Mensualité",
+      "per_month": "/mois",
+      "amount_financed": "Montant à financer",
+      "down_payment": "Apport",
+      "term": "Durée",
+      "months": "mois",
+      "tin_label": "TAEG estimé",
+      "disclaimer": "Mensualité indicative, non contractuelle et soumise à l'approbation de l'organisme de financement.",
+      "cta": "Demander un financement"
+    },
     "reserve": {
       "title": "Réserver le véhicule",
       "description": "Réservez le véhicule pour vous assurer que personne d'autre ne le prenne, et nous vous contacterons pour vous aider dans tout le processus d'achat.",

@@ -756,6 +756,19 @@
       "financed": "Precio financiado",
       "financed_short": "Financiado"
     },
+    "calculator": {
+      "title": "Simulador de financiación",
+      "subtitle": "Calcula tu cuota mensual estimada",
+      "monthly_payment": "Cuota mensual",
+      "per_month": "/mes",
+      "amount_financed": "Importe a financiar",
+      "down_payment": "Entrada",
+      "term": "Plazo",
+      "months": "meses",
+      "tin_label": "TIN estimado",
+      "disclaimer": "Cuota orientativa, no vinculante y sujeta a la aprobación de la entidad financiera.",
+      "cta": "Solicitar financiación"
+    },
     "reserve": {
       "title": "Reservar vehículo",
       "description": "Reserva el vehículo para asegurarte de que no te lo quiten, y nos pondremos en contacto contigo para ayudarte con todo el proceso de compra.",

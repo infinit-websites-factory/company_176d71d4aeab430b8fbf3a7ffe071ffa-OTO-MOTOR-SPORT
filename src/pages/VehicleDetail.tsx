@@ -14,6 +14,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import ReservedBanner from "@/components/ReservedBanner";
+import FinanceCalculator from "@/components/FinanceCalculator";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -130,8 +131,6 @@ const VehicleDetail = () => {
   const prevImage = () => {
     setCurrentImageIndex(prev => (prev - 1 + vehicle.images.length) % vehicle.images.length);
   };
-  const monthlyPayment = Math.round(vehicle.price / 84); // 84 months financing
-
   const getBadgeImage = (badge?: string) => {
     if (!badge) return null;
     const badgeLower = badge.toLowerCase();
@@ -481,6 +480,9 @@ const VehicleDetail = () => {
                 </div>
               )}
             </div>
+
+            {/* Finance Calculator */}
+            <FinanceCalculator price={vehicle.price} financedPrice={vehicle.financedPrice} />
 
             {/* Reserve Button */}
             {vehicle.status !== 'Reserved' && (

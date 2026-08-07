@@ -755,6 +755,19 @@
       "financed": "Financed price",
       "financed_short": "Financed"
     },
+    "calculator": {
+      "title": "Financing simulator",
+      "subtitle": "Estimate your monthly payment",
+      "monthly_payment": "Monthly payment",
+      "per_month": "/mo",
+      "amount_financed": "Amount financed",
+      "down_payment": "Down payment",
+      "term": "Term",
+      "months": "months",
+      "tin_label": "Estimated NIR",
+      "disclaimer": "Indicative payment, non-binding and subject to lender approval.",
+      "cta": "Apply for financing"
+    },
     "reserve": {
       "title": "Reserve vehicle",
       "description": "Reserve the vehicle to make sure no one else takes it, and we will contact you to help you with the entire purchase process.",
