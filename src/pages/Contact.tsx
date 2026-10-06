@@ -44,9 +44,9 @@ const CLOSED_NOW_LABEL: Record<string, string> = { es: "Cerrado ahora", en: "Clo
 const OPEN_SCHEDULE: Record<number, [number, number][]> = {
   1: [[9, 14], [16, 19]], // Mon
   2: [[9, 14], [16, 19]], // Tue
-  3: [[9, 19]],           // Wed
-  4: [[10, 20]],          // Thu
-  5: [[10, 20]],          // Fri
+  3: [[9, 14], [16, 19]], // Wed
+  4: [[9, 14], [16, 19]], // Thu
+  5: [[9, 14], [16, 19]], // Fri
 };
 
 const isOpenNow = (): boolean => {

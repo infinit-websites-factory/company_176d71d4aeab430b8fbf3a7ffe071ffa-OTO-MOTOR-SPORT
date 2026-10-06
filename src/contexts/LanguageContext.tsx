@@ -67,17 +67,17 @@ const ADDRESSES: Record<Language, AddressInfo> = {
 
 const OPENING_HOURS: Record<Language, { label: string; value: string; closed?: boolean }[]> = {
   es: [
-    { label: "Lun – Vie", value: "10:00–14:00, 16:00–20:00" },
+    { label: "Lun – Vie", value: "9:00–14:00, 16:00–19:00" },
     { label: "Sábado", value: "Con cita previa" },
     { label: "Domingo", value: "Cerrado", closed: true },
   ],
   en: [
-    { label: "Mon – Fri", value: "10:00–14:00, 16:00–20:00" },
+    { label: "Mon – Fri", value: "9:00–14:00, 16:00–19:00" },
     { label: "Saturday", value: "By appointment" },
     { label: "Sunday", value: "Closed", closed: true },
   ],
   fr: [
-    { label: "Lun – Ven", value: "10h00–14h00, 16h00–20h00" },
+    { label: "Lun – Ven", value: "9h00–14h00, 16h00–19h00" },
     { label: "Samedi", value: "Sur rendez-vous" },
     { label: "Dimanche", value: "Fermé", closed: true },
   ],
